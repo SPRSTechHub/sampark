@@ -9,6 +9,20 @@ Map<String, String> headers = {
   "Content-type": "application/x-www-form-urlencoded"
 };
 
+Future getAccess(String? token) async {
+  var jsonBody = {'token': token??'null', 'action': 'authchk'};
+  final response = await http.post(
+      Uri.parse('https://play.liveipl.online/apifile/authchecker/'),
+      headers: headers,
+      body: jsonBody);
+  if (response.statusCode == 200) {
+    var rsp = jsonDecode(response.body);
+    return rsp;
+  } else {
+    return null;
+  }
+}
+
 Future<List<AllCustomersData>?> getAllCustomers() async {
   var jsonBody = {'action': 'getdata'};
 

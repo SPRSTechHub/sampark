@@ -198,24 +198,29 @@ class _DashboardState extends State<Dashboard> {
                                 builder: (context) =>
                                     const Home(title: 'Sampark', page: 3)));
                       },
-                      child: Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              blurRadius: 1,
-                              color: Color(0xFF033D8D),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(
-                          Linecons.user,
-                          color: Colors.black,
-                          size: 24,
-                        ),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 1,
+                                  color: Color(0xFF033D8D),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Linecons.user,
+                              color: Colors.black,
+                              size: 24,
+                            ),
+                          ),
+                          const Text('Add New')
+                        ],
                       ),
                     ),
                     GestureDetector(
@@ -226,24 +231,29 @@ class _DashboardState extends State<Dashboard> {
                                 builder: (context) =>
                                     const Home(title: 'Sampark', page: 6)));
                       },
-                      child: Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              blurRadius: 1,
-                              color: Color(0xFF033D8D),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(
-                          Linecons.inbox,
-                          color: Colors.black,
-                          size: 24,
-                        ),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 1,
+                                  color: Color(0xFF033D8D),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Linecons.inbox,
+                              color: Colors.black,
+                              size: 24,
+                            ),
+                          ),
+                          const Text('Doc Upload')
+                        ],
                       ),
                     ),
                     GestureDetector(
@@ -254,24 +264,29 @@ class _DashboardState extends State<Dashboard> {
                                 builder: (context) =>
                                     const Home(title: 'Sampark', page: 5)));
                       },
-                      child: Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              blurRadius: 1,
-                              color: Color(0xFF033D8D),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(
-                          Linecons.wallet,
-                          color: Colors.black,
-                          size: 24,
-                        ),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 1,
+                                  color: Color(0xFF033D8D),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Linecons.wallet,
+                              color: Colors.black,
+                              size: 24,
+                            ),
+                          ),
+                          const Text('Payments')
+                        ],
                       ),
                     ),
                     GestureDetector(
@@ -281,28 +296,36 @@ class _DashboardState extends State<Dashboard> {
                             MaterialPageRoute(
                                 builder: (context) => const AddLoan()));
                       },
-                      child: Container(
-                        width: 48,
-                        height: 48,
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          boxShadow: const [
-                            BoxShadow(
-                              blurRadius: 1,
-                              color: Color(0xFF033D8D),
-                            )
-                          ],
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: const Icon(
-                          Linecons.note,
-                          color: Colors.black,
-                          size: 24,
-                        ),
+                      child: Column(
+                        children: [
+                          Container(
+                            width: 48,
+                            height: 48,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: const [
+                                BoxShadow(
+                                  blurRadius: 1,
+                                  color: Color(0xFF033D8D),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                            child: const Icon(
+                              Linecons.note,
+                              color: Colors.black,
+                              size: 24,
+                            ),
+                          ),
+                          const Text('Reports')
+                        ],
                       ),
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(
+                height: 4,
               ),
               if (SizerUtil.deviceType == DeviceType.mobile)
                 if (_isBannerAdReady)

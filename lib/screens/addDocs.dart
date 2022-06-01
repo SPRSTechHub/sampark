@@ -67,6 +67,11 @@ class _DocVrfState extends State<DocVrf> {
             child: Column(
               children: [
                 Material(
+                    elevation: 8,
+                    color: Colors.indigo[800],
+                    borderRadius: BorderRadius.circular(15.0),
+                    child: Container(height: 200, color: Colors.indigo[800])),
+                Material(
                   elevation: 8,
                   color: Colors.indigo[800],
                   borderRadius: BorderRadius.circular(15.0),
@@ -366,104 +371,6 @@ class _DocVrfState extends State<DocVrf> {
                     }
                   }),
                 ),
-                /*Material(
-                  elevation: 8,
-                  color: Colors.indigo[800],
-                  borderRadius: BorderRadius.circular(15.0),
-                  child: Builder(builder: (context) {
-                    if (imageAdhaar != null) {
-                      return SizedBox(
-                        height: 120,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 80,
-                              margin: const EdgeInsets.all(6),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image.file(
-                                  imageAdhaar!,
-                                  width: 80.0,
-                                  height: 80.0,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                                child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                const Text('Upload Adhaar'),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          setState(() {
-                                            if (imageAdhaar != null) {
-                                              imageAdhaar = null;
-                                              uploadStat = 1;
-                                            }
-                                          });
-                                        },
-                                        child: const Text('Clear')),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          uploadPan('custcode', imageAdhaar!);
-                                        },
-                                        child: const Text('Upload'))
-                                  ],
-                                ),
-                              ],
-                            ))
-                          ],
-                        ),
-                      );
-                    } else {
-                      return SizedBox(
-                        height: 120,
-                        width: MediaQuery.of(context).size.width * 0.9,
-                        child: Row(
-                          children: [
-                            Container(
-                              width: 120,
-                              height: 120,
-                              margin: const EdgeInsets.all(6),
-                              child: Lottie.network(
-                                  'https://assets8.lottiefiles.com/packages/lf20_hksn6fxa.json'),
-                            ),
-                            Expanded(
-                                child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
-                                const Text('Upload Customer face photo'),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  children: [
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          getAdhaar(ImageSource.camera);
-                                        },
-                                        child: const Text('Camera')),
-                                    ElevatedButton(
-                                        onPressed: () {
-                                          getAdhaar(ImageSource.gallery);
-                                        },
-                                        child: const Text('Gallary'))
-                                  ],
-                                ),
-                              ],
-                            ))
-                          ],
-                        ),
-                      );
-                    }
-                  }),
-                ),
-              */
               ],
             )),
       ),

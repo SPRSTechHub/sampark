@@ -8,6 +8,6 @@ class PackageInfoApi {
 
   static Future<String> getAppVersion() async {
     final packageInfo = await PackageInfo.fromPlatform();
-    return '${packageInfo.version}:${packageInfo.buildNumber}';
+    return packageInfo.version;
   }
 }

@@ -76,13 +76,13 @@ class _AllCustomersState extends State<AllCustomers> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Loan Amount : Rs. ${customer![index].loanAmnt ?? '0.00'}',
+                        'Loan: Rs. ${customer![index].loanAmnt ?? '0.00'}',
                         style: TextStyle(
                           color: Colors.blue[800],
                         ),
                       ),
                       Text(
-                        'Emi Amount : Rs. ${customer![index].emiAmnt ?? '0.00'}',
+                        'Emi: Rs. ${customer![index].emiAmnt ?? '0.00'}',
                         style: TextStyle(
                           color: Colors.blue[800],
                         ),

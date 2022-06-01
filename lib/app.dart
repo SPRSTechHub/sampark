@@ -3,7 +3,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:get/get.dart';
+import 'package:sampark/screens/addDocs.dart';
+
 import 'package:sampark/utils/config.dart';
+import 'package:sampark/utils/api.dart';
 import 'package:sampark/utils/push.dart';
 import 'package:sampark/widgets/navDrawer.dart';
 import 'package:sampark/widgets/topBar.dart';
@@ -13,7 +16,6 @@ import 'screens/dashboard.dart';
 import 'screens/addLoan.dart';
 import 'screens/addnew.dart';
 import 'screens/collectEmi.dart';
-import 'screens/docVerify.dart';
 import 'screens/reports.dart';
 
 class Home extends StatefulWidget {
@@ -28,13 +30,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late int selectedPage;
-  dynamic version = '';
-  String wversion = '1.0.1:1';
+  dynamic vLocal = '';
+  String vWeb = '';
+  String updateUri = '';
 
   Future<void> getAppVersion() async {
-    String v = await PackageInfoApi.getAppVersion();
-    if (version != v) {
-      showAlertDialog();
+    String vLocal = await PackageInfoApi.getAppVersion();
+    var acsRsp = await getAccess('notoken');
+    if (acsRsp != null) {
+      if (acsRsp['data'] != null) {
+        vWeb = acsRsp['data']['app_version'];
+        updateUri = acsRsp['data']['updateUrl'];
+        int v1Number = getExtendedVersionNumber(vLocal);
+        int v2Number = getExtendedVersionNumber(vWeb);
+        if (v1Number != v2Number) {
+          showAlertDialog();
+        }
+      }
     }
   }
 
@@ -179,15 +191,17 @@ class _HomeState extends State<Home> {
 
     Widget confirm = ElevatedButton(
       style: style,
-      onPressed: () {},
-      child: const Text('Start'),
+      onPressed: () {
+        print(updateUri);
+      },
+      child: const Text('Update'),
     );
     Widget cancel = ElevatedButton(
       style: style,
       onPressed: () {
         Get.back();
       },
-      child: const Text('Start'),
+      child: const Text('Cancel'),
     );
 
     Get.defaultDialog(
@@ -199,10 +213,10 @@ class _HomeState extends State<Home> {
       radius: 8,
       content: Column(
         children: [
-          Text(version),
+          Text('Update Available here !'),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[confirm, cancel],
+            children: <Widget>[cancel, confirm],
           ),
         ],
       ),
@@ -210,5 +224,11 @@ class _HomeState extends State<Home> {
         return false;
       },
     );
+  }
+
+  int getExtendedVersionNumber(String version) {
+    List versionCells = version.split('.');
+    versionCells = versionCells.map((i) => int.parse(i)).toList();
+    return versionCells[0] * 100000 + versionCells[1] * 1000 + versionCells[2];
   }
 }

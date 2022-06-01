@@ -36,12 +36,16 @@ class LocalNotificationService {
   static void createanddisplaynotification(RemoteMessage message) async {
     try {
       final id = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+
       const NotificationDetails notificationDetails = NotificationDetails(
         android: AndroidNotificationDetails(
           "samparkapp",
           "samparkappchannel",
           importance: Importance.max,
           priority: Priority.high,
+          sound: RawResourceAndroidNotificationSound('alert'),
+          enableVibration: true,
+          playSound: true,
         ),
       );
 
