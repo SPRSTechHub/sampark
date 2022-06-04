@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_brace_in_string_interps
+
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,7 @@ import 'package:sampark/utils/api.dart';
 import 'package:sampark/utils/push.dart';
 import 'package:sampark/widgets/navDrawer.dart';
 import 'package:sampark/widgets/topBar.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'screens/allCust.dart';
 import 'screens/dashboard.dart';
@@ -31,22 +34,34 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   late int selectedPage;
   dynamic vLocal = '';
-  String vWeb = '';
+  dynamic vWeb = '';
+  String message = '';
   String updateUri = '';
 
   Future<void> getAppVersion() async {
     String vLocal = await PackageInfoApi.getAppVersion();
     var acsRsp = await getAccess('notoken');
+
     if (acsRsp != null) {
       if (acsRsp['data'] != null) {
         vWeb = acsRsp['data']['app_version'];
         updateUri = acsRsp['data']['updateUrl'];
         int v1Number = getExtendedVersionNumber(vLocal);
         int v2Number = getExtendedVersionNumber(vWeb);
+
         if (v1Number != v2Number) {
+          message = 'Pls update your app from ${vLocal} to ${vWeb}';
           showAlertDialog();
         }
       }
+    }
+  }
+
+  lunchUrl(String url) async {
+    if (await canLaunchUrl(Uri.parse(url))) {
+      await launchUrl(Uri.parse(url));
+    } else {
+      throw 'Could not launch $url';
     }
   }
 
@@ -62,9 +77,9 @@ class _HomeState extends State<Home> {
     LocalNotificationService.initialize(context);
     FirebaseMessaging.instance.getInitialMessage().then(
       (message) {
-        print("FirebaseMessaging.instance.getInitialMessage");
+        // print("FirebaseMessaging.instance.getInitialMessage");
         if (message != null) {
-          print("New Notification");
+          //  print("New Notification");
           // if (message.data['_id'] != null) {
           //   Navigator.of(context).push(
           //     MaterialPageRoute(
@@ -79,11 +94,11 @@ class _HomeState extends State<Home> {
     );
     FirebaseMessaging.onMessage.listen(
       (message) {
-        print("FirebaseMessaging.onMessage.listen");
+        //print("FirebaseMessaging.onMessage.listen");
         if (message.notification != null) {
-          print(message.notification!.title);
+          /*   print(message.notification!.title);
           print(message.notification!.body);
-          print("message.data11 ${message.data}");
+          print("message.data11 ${message.data}"); */
           LocalNotificationService.createanddisplaynotification(message);
         }
       },
@@ -192,14 +207,14 @@ class _HomeState extends State<Home> {
     Widget confirm = ElevatedButton(
       style: style,
       onPressed: () {
-        print(updateUri);
+        lunchUrl(updateUri);
       },
       child: const Text('Update'),
     );
     Widget cancel = ElevatedButton(
       style: style,
       onPressed: () {
-        Get.back();
+        // Get.back();
       },
       child: const Text('Cancel'),
     );
@@ -213,7 +228,8 @@ class _HomeState extends State<Home> {
       radius: 8,
       content: Column(
         children: [
-          Text('Update Available here !'),
+          Text(message),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[cancel, confirm],

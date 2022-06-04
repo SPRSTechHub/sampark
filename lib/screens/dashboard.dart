@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:fluttericon/linecons_icons.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sampark/app.dart';
 import 'package:sampark/screens/addLoan.dart';
@@ -15,19 +17,20 @@ class Dashboard extends StatefulWidget {
   State<Dashboard> createState() => _DashboardState();
 }
 
+Future<InitializationStatus> _initGoogleMobileAds() {
+  return MobileAds.instance.initialize();
+}
+
 class _DashboardState extends State<Dashboard> {
   late BannerAd _bannerAd;
   bool _isBannerAdReady = false;
-
-  Future<InitializationStatus> _initGoogleMobileAds() {
-    return MobileAds.instance.initialize();
-  }
 
   @override
   void initState() {
     if (SizerUtil.deviceType == DeviceType.mobile) {
       _runAds();
     }
+    super.initState();
   }
 
   @override
@@ -381,7 +384,15 @@ class _DashboardState extends State<Dashboard> {
           });
         },
         onAdFailedToLoad: (ad, err) {
-          // print('Failed to load a banner ad: ${err.message}');
+          Get.snackbar(
+            "Alert",
+            err.message,
+            colorText: Colors.white,
+            icon: const Icon(LineariconsFree.alarm, color: Colors.white),
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: Colors.red[900],
+          );
+
           _isBannerAdReady = false;
           ad.dispose();
         },

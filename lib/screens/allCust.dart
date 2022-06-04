@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
-import 'package:getwidget/getwidget.dart';
 import 'package:sampark/model/allcustomers.dart';
 import 'package:sampark/screens/profileScreen.dart';
 import 'package:sampark/utils/api.dart';
@@ -55,7 +54,7 @@ class _AllCustomersState extends State<AllCustomers> {
                 elevation: 8.0,
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                child: GFListTile(
+                child: Container()/* GFListTile(
                   onTap: () {
                     Navigator.push(
                       context,
@@ -96,7 +95,7 @@ class _AllCustomersState extends State<AllCustomers> {
                   padding: const EdgeInsets.all(2),
                   margin: const EdgeInsets.all(2),
                 ),
-              );
+            */  );
             }),
       ),
     );
