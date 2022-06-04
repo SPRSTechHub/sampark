@@ -392,7 +392,7 @@ class _DocVrfState extends State<DocVrf> {
         showSpinner = true;
         //uploadStat = 1;
       });
-      var profileUpload = await uploadImage(custCode, imagePan);
+      var profileUpload = await uploadImage(custCode, image);
       if (profileUpload != false && profileUpload['status'] == 0) {
         setState(() {
           showSpinner = false;
