@@ -49,13 +49,18 @@ class _AllCustomersState extends State<AllCustomers> {
             itemCount: customer?.length,
             itemBuilder: (context, index) {
               return Card(
-                shadowColor: Colors.white60,
-                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15.0),
+                ),
                 elevation: 8.0,
                 margin:
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
-                child: Container()/* GFListTile(
-                  onTap: () {
+                child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15.0),
+                        color: const Color.fromARGB(228, 0, 43, 122)),
+                  child:ListTile(
+                    onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -64,40 +69,56 @@ class _AllCustomersState extends State<AllCustomers> {
                       ),
                     );
                   },
-                  avatar: GFAvatar(
-                      backgroundImage: NetworkImage(
-                          'https://play.liveipl.online/uploads/${customer![index].imgLink}'),
-                      shape: GFAvatarShape.standard),
-                  titleText: customer![index].name,
-                  subTitleText: customer![index].mobile ?? 'XXX',
-                  description: Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Loan: Rs. ${customer![index].loanAmnt ?? '0.00'}',
-                        style: TextStyle(
-                          color: Colors.blue[800],
+                       leading: customer![index].imgLink != null? CircleAvatar(
+                           radius: 28,
+                          backgroundImage:NetworkImage('https://play.liveipl.online/uploads/${customer![index].imgLink}'),
+                        ): const CircleAvatar(
+                         //  radius: 100,
+                           backgroundImage: AssetImage('assets/images/error_logo.png'),),
+                       
+                        // ignore: unnecessary_null_comparison
+                         title: Text(
+                          customer![index].name,
+                          style: const TextStyle(
+                              color: Colors.white, fontWeight: FontWeight.bold),
                         ),
+                       subtitle: customer![index].cstatus == 'Y'?   
+                       Column(
+                         children: [
+                           Text(
+                             textAlign:TextAlign.left,
+                            'M: ${customer![index].mobile ?? 'XXXXX'}',
+                            style: const TextStyle(
+                              color: Colors.white60,
+                            ),),
+                            const SizedBox(height: 10,),
+                           Row(
+                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: <Widget>[
+                                Text(
+                            'Loan: Rs. ${customer![index].loanAmnt ?? '0.00'}',
+                            style: const TextStyle(
+                              color: Colors.white60,
+                            ),
                       ),
                       Text(
-                        'Emi: Rs. ${customer![index].emiAmnt ?? '0.00'}',
-                        style: TextStyle(
-                          color: Colors.blue[800],
-                        ),
+                            'Emi: Rs. ${customer![index].emiAmnt ?? '0.00'}',
+                            style: const TextStyle(
+                              color: Colors.white60,
+                            ),
                       ),
-                    ],
-                  ),
-                  icon: const Icon(
-                    LineariconsFree.arrow_right,
-                    color: Colors.black26,
-                  ),
-                  padding: const EdgeInsets.all(2),
-                  margin: const EdgeInsets.all(2),
-                ),
-            */  );
+                      ],
+                            ),
+                         ],
+                       ):
+                        const Text('No Loan Attached', style:TextStyle(color: Colors.red, fontSize: 18, fontWeight: FontWeight.w600)),
+                        trailing: const Icon(Icons.keyboard_arrow_right,
+                            color: Colors.white, size: 30.0)),),
+             );
             }),
       ),
     );
   }
 }
+
+

@@ -10,7 +10,7 @@ Map<String, String> headers = {
 };
 
 Future getAccess(String? token) async {
-  var jsonBody = {'token': token??'null', 'action': 'authchk'};
+  var jsonBody = {'token': token ?? 'null', 'action': 'authchk'};
   final response = await http.post(
       Uri.parse('https://play.liveipl.online/apifile/authchecker/'),
       headers: headers,

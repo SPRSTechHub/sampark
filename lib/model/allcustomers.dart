@@ -16,6 +16,7 @@ class AllCustomersData {
     required this.imgLink,
     this.loanAmnt,
     this.emiAmnt,
+    this.cstatus,
   });
 
   String name;
@@ -23,6 +24,7 @@ class AllCustomersData {
   String imgLink;
   String? loanAmnt;
   String? emiAmnt;
+  String? cstatus;
 
   factory AllCustomersData.fromJson(Map<String, dynamic> json) =>
       AllCustomersData(
@@ -31,6 +33,7 @@ class AllCustomersData {
         imgLink: json["img_link"],
         loanAmnt: json["loanAmnt"],
         emiAmnt: json["emiAmnt"],
+        cstatus: json["cstatus"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -39,5 +42,6 @@ class AllCustomersData {
         "img_link": imgLink,
         "loanAmnt": loanAmnt,
         "emiAmnt": emiAmnt,
+        "cstatus": cstatus,
       };
 }

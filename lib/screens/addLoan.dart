@@ -32,6 +32,9 @@ class _AddLoanState extends State<AddLoan> {
     cust_code_Controller.dispose();
     loan_amnt_Controller.dispose();
     emi_amnt_Controller.dispose();
+    //
+    tenure_Controller.dispose();
+purpose_Controller.dispose();
     super.dispose();
   }
 
@@ -260,8 +263,34 @@ class _AddLoanState extends State<AddLoan> {
                           decoration: BoxDecoration(
                               color: Colors.blue,
                               borderRadius: BorderRadius.circular(10)),
-                          child: Text(
-                              'Dropdown'), /* DropDownField(
+                          child: TextFormField(
+                          onChanged: (_) => EasyDebounce.debounce(
+                            'loan_txt',
+                            const Duration(milliseconds: 2000),
+                            () => setState(() {}),
+                          ),
+                          obscureText: false,
+                          decoration: CommonStyle.textFieldStyle(
+                            labelTextStr: "Tennure",
+                            hintTextStr: "Set Total Weeks",
+                            icon: const Icon(
+                              Icons.calendar_view_day_outlined,
+                            ),
+                          ),
+                          style: const TextStyle(color: Colors.white),
+                          textAlign: TextAlign.start,
+                          controller: tenure_Controller,
+                          keyboardType: TextInputType.number,
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length !=2) {
+                              return 'Must be 2 digits';
+                            }
+                            return null;
+                          },
+                        ),
+                       /* DropDownField(
                             value: selectTunnure,
                             required: true,
                             enabled: true,
@@ -287,8 +316,34 @@ class _AddLoanState extends State<AddLoan> {
                             decoration: BoxDecoration(
                                 color: Colors.blue,
                                 borderRadius: BorderRadius.circular(10)),
-                            child: Text(
-                                'Dropdown here') /* DropDownField(
+                            child: TextFormField(
+                          onChanged: (_) => EasyDebounce.debounce(
+                            'loan_txt',
+                            const Duration(milliseconds: 2000),
+                            () => setState(() {}),
+                          ),
+                          obscureText: false,
+                          decoration: CommonStyle.textFieldStyle(
+                            labelTextStr: "Purpose",
+                            hintTextStr: "Enter Reason for Loan",
+                            icon: const Icon(
+                              Icons.expand_circle_down,
+                            ),
+                          ),
+                          style: const TextStyle(color: Colors.white),
+                          textAlign: TextAlign.start,
+                          controller: purpose_Controller,
+                          keyboardType: TextInputType.text,
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length >=12) {
+                              return 'Minimum 5 Characters';
+                            }
+                            return null;
+                          },
+                        ),
+                        /* DropDownField(
                             value: selectPurpose,
                             //  controller: selectPurpose,
                             required: true,
@@ -349,8 +404,10 @@ class _AddLoanState extends State<AddLoan> {
                               var cust_code = cust_code_Controller.text;
                               var emi_amnt = emi_amnt_Controller.text;
                               var loan_amnt = loan_amnt_Controller.text;
-                              var purpose = selectPurpose;
-                              var tenure = selectTunnure;
+                               var purpose = purpose_Controller.text;
+                              var tenure = tenure_Controller.text;
+                             // var purpose = selectPurpose;
+                            //  var tenure = selectTunnure;
 
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
