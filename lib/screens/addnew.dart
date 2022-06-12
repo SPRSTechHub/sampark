@@ -18,16 +18,16 @@ class AddNew extends StatefulWidget {
   State<AddNew> createState() => _AddNewState();
 }
 
+Future<InitializationStatus> _initGoogleMobileAds() {
+  return MobileAds.instance.initialize();
+}
+
 class _AddNewState extends State<AddNew> {
   bool showSpinner = false;
   // Set up Global Form Keys //
   final _formKey = GlobalKey<FormState>();
   late BannerAd _bannerAd;
   bool _isBannerAdReady = false;
-
-  Future<InitializationStatus> _initGoogleMobileAds() {
-    return MobileAds.instance.initialize();
-  }
 
   // Set up Form inputs //
   final f_name_Controller = TextEditingController();
@@ -43,6 +43,7 @@ class _AddNewState extends State<AddNew> {
     if (SizerUtil.deviceType == DeviceType.mobile) {
       _runAds();
     }
+    super.initState();
   }
 
   @override
@@ -679,24 +680,9 @@ class _AddNewState extends State<AddNew> {
                                         child: const Text('Next'),
                                       ),
                                     ),
-                                    /*  ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).push(
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      const AddCustImage(
-                                                          imageKey: "dddddd"
-                                                          /*  imageKey: response[
-                                                                'ccode'] */
-                                                          )));
-                                        },
-                                        child: const Text('data')) */
                                   ],
                                 ),
                               ),
-                              Container(
-                                height: 500,
-                              )
                             ],
                           ),
                         ),
@@ -777,8 +763,8 @@ class CommonStyle {
         borderRadius: BorderRadius.circular(10),
       ),
       prefixIcon: IconTheme(
-          data: IconThemeData(color: Colors.white),
-          child: icon ?? Icon(Icons.done)),
+          data: const IconThemeData(color: Colors.white),
+          child: icon ?? const Icon(Icons.done)),
     );
   }
 }

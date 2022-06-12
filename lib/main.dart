@@ -19,8 +19,6 @@ List<String> testDeviceIds = ['2589CF5FD4D7E0134C7CC050F01300C4'];
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-  // thing to add
   RequestConfiguration configuration =
       RequestConfiguration(testDeviceIds: testDeviceIds);
   MobileAds.instance.updateRequestConfiguration(configuration);

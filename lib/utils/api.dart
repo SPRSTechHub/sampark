@@ -71,13 +71,14 @@ Future getCust(String mobile) async {
   }
 }
 
-Future addLoanFunc(
-    mobile, cust_code, emi_amnt, loan_amnt, purpose, tenure) async {
+Future addLoanFunc(String mobile, String custCode, String emiAmnt,
+    String loanDate, String loanAmnt, String purpose, String tenure) async {
   var jsonBody = {
     'mobile': mobile,
-    'cust_code': cust_code,
-    'emi_amnt': emi_amnt,
-    'loan_amnt': loan_amnt,
+    'cust_code': custCode,
+    'emi_amnt': emiAmnt,
+    'loan_date': loanDate,
+    'loan_amnt': loanAmnt,
     'purpose': purpose,
     'tenure': tenure,
     'action': 'add_new_loan'
