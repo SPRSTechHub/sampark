@@ -103,6 +103,7 @@ class _HomeState extends State<Home> {
         }
       },
     );
+
     FirebaseMessaging.onMessageOpenedApp.listen(
       (message) {
         print("FirebaseMessaging.onMessageOpenedApp.listen");
