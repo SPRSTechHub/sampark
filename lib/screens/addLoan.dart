@@ -270,7 +270,7 @@ class _AddLoanState extends State<AddLoan> {
                                                         BorderRadius.circular(
                                                             10),
                                                   ),
-                                                  prefixIcon: const IconTheme(
+                                                  prefixIcon: IconTheme(
                                                       data: IconThemeData(
                                                           color: Colors.white),
                                                       child: Icon(Icons
@@ -280,7 +280,51 @@ class _AddLoanState extends State<AddLoan> {
                                                       ? InkWell(
                                                           onTap: () => setState(
                                                             () {
-                                                              profileCard();
+                                                              Future.delayed(
+                                                                  const Duration(
+                                                                      seconds:
+                                                                          1),
+                                                                  () async {
+                                                                var resp = await getCbil(
+                                                                    'mobile',
+                                                                    mobileController
+                                                                        .text);
+                                                                // ignore: avoid_print
+                                                                //{}
+                                                                if (resp !=
+                                                                    null) {
+                                                                  Get.bottomSheet(
+                                                                    customerCard(
+                                                                        context:
+                                                                            context,
+                                                                        profileurl:
+                                                                            'https://play.liveipl.online/uploads/149377355.jpg',
+                                                                        pan:
+                                                                            '1',
+                                                                        adhaar:
+                                                                            '1',
+                                                                        count:
+                                                                            '1',
+                                                                        cbil:
+                                                                            '800',
+                                                                        profile:
+                                                                            '1'),
+                                                                    backgroundColor:
+                                                                        Colors
+                                                                            .white,
+                                                                    elevation:
+                                                                        0,
+                                                                    shape:
+                                                                        RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              10),
+                                                                    ),
+                                                                  );
+                                                                }
+                                                                print(
+                                                                    'gud: $resp');
+                                                              });
                                                             },
                                                           ),
                                                           child: const Icon(
@@ -772,75 +816,6 @@ class _AddLoanState extends State<AddLoan> {
     );
   }
 
-  void profileCard() {
-    Get.bottomSheet(
-      Container(
-        color: Colors.amber,
-        child: Column(
-          children: [
-            Stack(
-              alignment: Alignment.center,
-              clipBehavior: Clip.none,
-              children: [
-                Container(
-                  color: Colors.grey,
-                  child: Image.network(
-                      "https://images.unsplash.com/photo-1653778005824-4bc7dc887603?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8",
-                      width: MediaQuery.of(context).size.width,
-                      height: 200,
-                      fit: BoxFit.cover),
-                ),
-                const Positioned(
-                    top: 120,
-                    child: CircleAvatar(
-                      radius: 65,
-                      backgroundColor: Colors.grey,
-                      backgroundImage: NetworkImage(
-                          "https://images.unsplash.com/photo-1524502397800-2eeaad7c3fe5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8"),
-                    ))
-              ],
-            ),
-            const SizedBox(height: 60),
-            const Center(
-              child: Text(
-                'Customer Name',
-                style: TextStyle(fontSize: 18),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                verificationDocsIcon(LineariconsFree.license,
-                    LineariconsFree.checkmark_cicle, 'profile'),
-                // const SizedBox(height: 20),
-                verificationDocsIcon(LineariconsFree.license,
-                    LineariconsFree.checkmark_cicle, 'Adhaar'),
-                //const SizedBox(height: 20),
-                verificationDocsIcon(LineariconsFree.license,
-                    LineariconsFree.checkmark_cicle, 'Pan'),
-              ],
-            ),
-            TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
-              ),
-              onPressed: () {
-                Get.back();
-              },
-              child: const Text('Close'),
-            ),
-          ],
-        ),
-      ),
-      backgroundColor: Colors.white,
-      elevation: 0,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-    );
-  }
-
   void _runAds() {
     _bannerAd = BannerAd(
       adUnitId: AdHelper.bannerAdUnitId,
@@ -911,23 +886,119 @@ class _AddLoanState extends State<AddLoan> {
   }
 }
 
+//'profile_url': 'https://play.liveipl.online/uploads/149377355.jpg', 'profile': '1', 'pan': '1', 'adhaar': '1', 'count': '1', 'cbil': '800'
+// ignore: camel_case_types
+class customerCard extends StatelessWidget {
+  final String? profileurl;
+  final String? profile;
+  final String? pan;
+  final String? adhaar;
+  final String? count;
+  final String? cbil;
+
+  const customerCard({
+    Key? key,
+    required this.context,
+    this.profile,
+    this.profileurl,
+    this.pan,
+    this.adhaar,
+    this.count,
+    this.cbil,
+  }) : super(key: key);
+
+  final BuildContext context;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.amber,
+      child: Column(
+        children: [
+          Stack(
+            alignment: Alignment.center,
+            clipBehavior: Clip.none,
+            children: [
+              Container(
+                color: Colors.grey,
+                child: Image.network(
+                    'https://images.unsplash.com/photo-1653778005824-4bc7dc887603',
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    fit: BoxFit.cover),
+              ),
+              Positioned(
+                  top: 120,
+                  child: CircleAvatar(
+                    radius: 65,
+                    backgroundColor: Colors.grey,
+                    backgroundImage: NetworkImage(profileurl!),
+                  ))
+            ],
+          ),
+          const SizedBox(height: 60),
+          Center(
+            child: Text(
+              '$profile',
+              style: const TextStyle(fontSize: 18),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              verificationDocsIcon(
+                  LineariconsFree.license,
+                  profile == '1'
+                      ? LineariconsFree.checkmark_cicle
+                      : LineariconsFree.cross_circle,
+                  'profile'),
+              verificationDocsIcon(
+                  LineariconsFree.license,
+                  adhaar == '1'
+                      ? LineariconsFree.checkmark_cicle
+                      : LineariconsFree.cross_circle,
+                  'Adhaar'),
+              verificationDocsIcon(
+                  LineariconsFree.license,
+                  pan == '1'
+                      ? LineariconsFree.checkmark_cicle
+                      : LineariconsFree.cross_circle,
+                  'Pan'),
+            ],
+          ),
+          TextButton(
+            style: ButtonStyle(
+              foregroundColor: MaterialStateProperty.all<Color>(Colors.blue),
+            ),
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('Close'),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 Widget verificationDocsIcon(IconData icon, IconData icon2, String? txtdata) {
   return Material(
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
     clipBehavior: Clip.hardEdge,
-    color: Colors.red,
+    color: Colors.black87,
     child: InkWell(
         onTap: () {},
         child: Center(
           child: Container(
             padding: const EdgeInsets.all(4),
-            width: 75,
+            width: 110,
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(icon, size: 32),
+                    Icon(icon, size: 18),
                     const SizedBox(
                       width: 10,
                     ),
@@ -937,6 +1008,9 @@ Widget verificationDocsIcon(IconData icon, IconData icon2, String? txtdata) {
                       color: Colors.blue,
                     ),
                   ],
+                ),
+                const SizedBox(
+                  height: 10,
                 ),
                 Text(txtdata!),
               ],

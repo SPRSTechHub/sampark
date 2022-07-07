@@ -165,3 +165,20 @@ Future customerRegistration(
     return false;
   }
 }
+
+// get Customer Cibil Score //
+
+Future getCbil(String mobile, String dataval) async {
+  var jsonBody = {'checkby': mobile, 'dataval': dataval, 'action': 'chkcbil'};
+  final response = await http.post(
+      Uri.parse('https://play.liveipl.online/apifile/fetch_cibil/'),
+      headers: headers,
+      body: jsonBody);
+  if (response.statusCode == 200) {
+    var rsp = jsonDecode(response.body);
+  //  print(rsp);
+    return rsp;
+  } else {
+    return null;
+  }
+}
