@@ -8,7 +8,7 @@ import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sampark/app.dart';
 import 'package:sizer/sizer.dart';
 
-Future<void> backgroundHandler(RemoteMessage message) async {
+Future<void> _backgroundHandler(RemoteMessage message) async {
   print(message.data.toString());
   print(message.notification!.title);
 }
@@ -23,9 +23,7 @@ void main() async {
   MobileAds.instance.updateRequestConfiguration(configuration);
 
   MobileAds.instance.initialize();
-  FirebaseMessaging.onBackgroundMessage(backgroundHandler);
-  final fcmToken = await FirebaseMessaging.instance.getToken();
-  print(fcmToken);
+  FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
 
   runApp(const MyApp());
 }
@@ -60,6 +58,9 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+//  final fcmToken = await FirebaseMessaging.instance.getToken();
+// print(fcmToken);
 
 class AppScrollBehavior extends MaterialScrollBehavior {
   @override
