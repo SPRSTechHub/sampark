@@ -24,6 +24,8 @@ void main() async {
 
   MobileAds.instance.initialize();
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
+  final fcmToken = await FirebaseMessaging.instance.getToken();
+  print(fcmToken);
 
   runApp(const MyApp());
 }
@@ -49,12 +51,10 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData.dark(),
           themeMode: ThemeMode.system,
-          home: const  
-          
-          /* Home(
+          home: const Home(
             title: 'Sampark',
             page: -1,
-          ), */
+          ),
         );
       },
     );
