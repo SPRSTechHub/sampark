@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sampark/app.dart';
+import 'package:sampark/screens/login.dart';
 import 'package:sizer/sizer.dart';
 
 Future<void> _backgroundHandler(RemoteMessage message) async {
@@ -49,10 +50,11 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData.dark(),
           themeMode: ThemeMode.system,
-          home: const Home(
+          home: const AuthScreen(),
+          /* const Home(
             title: 'Sampark',
             page: -1,
-          ),
+          ), */
         );
       },
     );

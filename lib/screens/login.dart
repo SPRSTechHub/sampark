@@ -10,14 +10,14 @@ import 'package:sampark/utils/api.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:sizer/sizer.dart';
 
-class AddLoan extends StatefulWidget {
-  const AddLoan({Key? key}) : super(key: key);
+class AuthScreen extends StatefulWidget {
+  const AuthScreen({Key? key}) : super(key: key);
 
   @override
-  State<AddLoan> createState() => _AddLoanState();
+  State<AuthScreen> createState() => _AuthScreenState();
 }
 
-class _AddLoanState extends State<AddLoan> {
+class _AuthScreenState extends State<AuthScreen> {
   late BannerAd _bannerAd;
   bool _isBannerAdReady = false;
 
