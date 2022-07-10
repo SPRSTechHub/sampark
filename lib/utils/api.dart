@@ -23,6 +23,26 @@ Future getAccess(String? token) async {
   }
 }
 
+Future authUserCheck(
+    String? emplcodeT, String? passwordT, String? tokenT) async {
+  var jsonBody = {
+    'token': tokenT ?? 'null',
+    'empl_code': emplcodeT ?? 'null',
+    'password': passwordT ?? 'null',
+    'action': 'login'
+  };
+  final response = await http.post(
+      Uri.parse('https://play.liveipl.online/apifile/authchecker/'),
+      headers: headers,
+      body: jsonBody);
+  if (response.statusCode == 200) {
+    var rsp = jsonDecode(response.body);
+    return rsp;
+  } else {
+    return null;
+  }
+}
+
 Future<List<AllCustomersData>?> getAllCustomers() async {
   var jsonBody = {'action': 'getdata'};
 
@@ -176,7 +196,7 @@ Future getCbil(String mobile, String dataval) async {
       body: jsonBody);
   if (response.statusCode == 200) {
     var rsp = jsonDecode(response.body);
-  //  print(rsp);
+    //  print(rsp);
     return rsp;
   } else {
     return null;
