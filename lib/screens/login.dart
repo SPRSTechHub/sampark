@@ -1,10 +1,13 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable
 
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
+import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:sampark/app.dart';
 import 'package:sampark/utils/api.dart';
 
 class AuthScreen extends StatefulWidget {
@@ -20,9 +23,11 @@ class _AuthScreenState extends State<AuthScreen> {
 
   final emplcode = TextEditingController();
   final password = TextEditingController();
+  late dynamic fcmToken;
 
   @override
   void initState() {
+    getToken();
     super.initState();
   }
 
@@ -119,8 +124,8 @@ class _AuthScreenState extends State<AuthScreen> {
                           const SizedBox(
                             height: 20,
                           ),
-                          /*    Container(
-                            height: 80, //height of button
+                          Container(
+                            height: 80,
                             width: 120,
                             padding: const EdgeInsets.symmetric(vertical: 16.0),
                             child: ElevatedButton(
@@ -131,7 +136,7 @@ class _AuthScreenState extends State<AuthScreen> {
                                   });
                                   var emplcodeT = emplcode.text;
                                   var passwordT = password.text;
-                                  var tokenT = 'ssssss';
+                                  var tokenT = fcmToken;
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       action: SnackBarAction(
@@ -186,9 +191,8 @@ class _AuthScreenState extends State<AuthScreen> {
                                         ),
                                       );
                                     });
-                                    /*  Get.to(const Home(
-                                                          title: 'Sampark',
-                                                          page: 0)); */
+                                    Get.to(
+                                        const Home(title: 'Sampark', page: 0));
                                   } else {
                                     setState(() {
                                       showSpinner = false;
@@ -203,30 +207,7 @@ class _AuthScreenState extends State<AuthScreen> {
                               },
                               child: const Text('Login'),
                             ),
-                          ), */
-                          SizedBox(
-                              height: 100, //height of button
-                              width: 100, //width of button
-                              child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                      primary: Colors
-                                          .redAccent, //background color of button
-                                      side: BorderSide(
-                                          width: 3,
-                                          color: Colors
-                                              .brown), //border width and color
-                                      elevation: 3, //elevation of button
-                                      shape: RoundedRectangleBorder(
-                                          //to set border radius to button
-                                          borderRadius:
-                                              BorderRadius.circular(30)),
-                                      padding: EdgeInsets.all(
-                                          20) //content padding inside button
-                                      ),
-                                  onPressed: () {
-                                    //code to execute when this button is pressed.
-                                  },
-                                  child: Text("Elevated Button"))),
+                          ),
                         ],
                       ),
                     ),
@@ -238,6 +219,10 @@ class _AuthScreenState extends State<AuthScreen> {
         ),
       ),
     );
+  }
+
+  getToken() async {
+    fcmToken = await FirebaseMessaging.instance.getToken();
   }
 }
 
