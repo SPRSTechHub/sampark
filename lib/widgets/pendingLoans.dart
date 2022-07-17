@@ -1,30 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:sampark/model/emipendings.dart';
 import 'package:sampark/utils/api.dart';
-
 import '../screens/emiScreen.dart';
 
-class PendingEmis extends StatefulWidget {
-  const PendingEmis({Key? key, required this.loanno}) : super(key: key);
-  final String loanno;
+class PendingLoans extends StatefulWidget {
+  const PendingLoans({Key? key}) : super(key: key);
 
   @override
-  State<PendingEmis> createState() => _PendingEmisState();
+  State<PendingLoans> createState() => _PendingLoansState();
 }
 
-class _PendingEmisState extends State<PendingEmis> {
-  List<Pendingloanemi>? emidata;
-
+class _PendingLoansState extends State<PendingLoans> {
+  List<Pendingloandata>? emidata;
   var isLoaded = false;
 
   @override
+  // ignore: must_call_super
   void initState() {
     super.initState();
     getData();
   }
 
   getData() async {
-    emidata = await getPendingEmi(widget.loanno, 'SMERR09', '17-07-2022');
+    emidata = await getPendingLoans('SMERR09', '17-07-2022');
     if (emidata != null) {
       if (!mounted) return;
       setState(() {
@@ -61,14 +59,14 @@ class _PendingEmisState extends State<PendingEmis> {
                       color: const Color.fromARGB(228, 0, 43, 122)),
                   child: ListTile(
                       onTap: () {
-                        /* Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => EmiProfile(
-                                ccode: emidata![index].date,
+                                ccode: emidata![index].custCode,
                                 loanno: emidata![index].loanNo),
                           ),
-                        ); */
+                        );
                       },
                       leading: const CircleAvatar(
                         //  radius: 100,
@@ -76,7 +74,7 @@ class _PendingEmisState extends State<PendingEmis> {
                             AssetImage('assets/images/error_logo.png'),
                       ),
                       title: Text(
-                        emidata![index].emiAmount,
+                        emidata![index].loanNo,
                         style: const TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
@@ -84,7 +82,7 @@ class _PendingEmisState extends State<PendingEmis> {
                         children: [
                           Text(
                             textAlign: TextAlign.left,
-                            'M: ${emidata![index].loanNo}',
+                            'M: ${emidata![index].name ?? 'No Name'}',
                             style: const TextStyle(
                               color: Colors.white60,
                             ),
@@ -96,13 +94,13 @@ class _PendingEmisState extends State<PendingEmis> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                'Loan:${emidata![index].emiAmount}',
+                                'Loan:${emidata![index].loanAmnt ?? '0.00'}',
                                 style: const TextStyle(
                                   color: Colors.white60,
                                 ),
                               ),
                               Text(
-                                'Emi:${emidata![index].emiCode}',
+                                'Emi:${emidata![index].pendingEmiCount ?? '0.00'}',
                                 style: const TextStyle(
                                   color: Colors.white60,
                                 ),

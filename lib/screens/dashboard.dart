@@ -18,6 +18,7 @@ class Dashboard extends StatefulWidget {
   State<Dashboard> createState() => _DashboardState();
 }
 
+// ignore: unused_element
 Future<InitializationStatus> _initGoogleMobileAds() {
   return MobileAds.instance.initialize();
 }

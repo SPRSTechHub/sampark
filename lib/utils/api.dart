@@ -4,6 +4,8 @@ import 'package:http/http.dart' as http;
 import 'package:sampark/model/allcustomers.dart';
 import 'package:sampark/model/customer.dart';
 
+import '../model/emipendings.dart';
+
 jsonString(Map<String, String> map) {}
 Map<String, String> headers = {
   "Content-type": "application/x-www-form-urlencoded"
@@ -54,6 +56,47 @@ Future<List<AllCustomersData>?> getAllCustomers() async {
     var rsp = jsonDecode(response.body);
     if (rsp['status'] == 1) {
       return AllCustomersDataFromJson(jsonEncode(rsp['data']));
+    } else {
+      return null;
+    }
+  }
+  return null;
+}
+
+Future<List<Pendingloanemi>?> getPendingEmi(
+    String loanno, String empcode, String date) async {
+  var jsonBody = {
+    'action': 'pending_emi',
+    'loan_no': loanno,
+    'emp_code': empcode,
+    'date': date
+  };
+
+  var client = http.Client();
+  var uri = Uri.parse('https://play.liveipl.online/apifile/getPendingEmi/');
+  final response = await client.post(uri, headers: headers, body: jsonBody);
+  if (response.statusCode == 200) {
+    var rsp = jsonDecode(response.body);
+    if (rsp['status'] == 1) {
+      return pendingloanemiFromJson(jsonEncode(rsp['data']));
+    } else {
+      return null;
+    }
+  }
+  return null;
+}
+
+Future<List<Pendingloandata>?> getPendingLoans(
+    String empcode, String date) async {
+  var jsonBody = {'action': 'pending_emi', 'emp_code': empcode, 'date': date};
+
+  var client = http.Client();
+  var uri = Uri.parse('https://play.liveipl.online/apifile/getPendingLoans/');
+  final response = await client.post(uri, headers: headers, body: jsonBody);
+  if (response.statusCode == 200) {
+    var rsp = jsonDecode(response.body);
+    if (rsp['status'] == 1) {
+      return pendingloandataFromJson(jsonEncode(rsp['data']));
     } else {
       return null;
     }

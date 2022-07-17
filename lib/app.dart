@@ -5,6 +5,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:get/get.dart';
+//import 'package:sampark/model/extra.dart';
 import 'package:sampark/screens/addDocs.dart';
 import 'package:sampark/screens/agenScreen.dart';
 
@@ -122,6 +123,7 @@ class _HomeState extends State<Home> {
   final _pageOptions = const [
     AllCustomers(),
     AgentScreen(),
+    // Dashboard(),
     Reports(),
     AddNew(),
     AddLoan(),

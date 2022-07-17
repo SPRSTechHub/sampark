@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sampark/utils/prefs.dart';
+import 'package:sampark/widgets/pendingLoans.dart';
 
 class AgentScreen extends StatefulWidget {
   const AgentScreen({Key? key}) : super(key: key);
@@ -25,75 +26,105 @@ class _AgentScreenState extends State<AgentScreen> {
       body: SingleChildScrollView(
         child: Container(
           height: size.height,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: 120,
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 197, 201, 207),
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(100),
-                      bottomRight: Radius.circular(0),
-                      topLeft: Radius.circular(0),
-                      topRight: Radius.circular(0),
+          width: size.width,
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
+                  child: Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: 120,
+                    decoration: const BoxDecoration(
+                      color: Color.fromARGB(255, 197, 201, 207),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(100),
+                        bottomRight: Radius.circular(0),
+                        topLeft: Radius.circular(0),
+                        topRight: Radius.circular(0),
+                      ),
+                      shape: BoxShape.rectangle,
                     ),
-                    shape: BoxShape.rectangle,
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 35.0),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.max,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisSize: MainAxisSize.max,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Hey ${empcode ?? 'No Name'} ,',
-                                style: TextStyle(
-                                    color: Colors.grey[800],
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 26)),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 22),
-                              child: Text(greetings(),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 35.0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text('Hey ${empcode ?? 'No Name'} ,',
                                   style: TextStyle(
                                       color: Colors.grey[800],
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 20)),
+                                      fontSize: 26)),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 22),
+                                child: Text(greetings(),
+                                    style: TextStyle(
+                                        color: Colors.grey[800],
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20)),
+                              ),
+                            ],
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(right: 10),
+                            width: 90,
+                            height: 90,
+                            clipBehavior: Clip.antiAlias,
+                            decoration: const BoxDecoration(
+                              shape: BoxShape.circle,
                             ),
-                          ],
-                        ),
-                        Container(
-                          margin: const EdgeInsets.only(right: 10),
-                          width: 90,
-                          height: 90,
-                          clipBehavior: Clip.antiAlias,
-                          decoration: const BoxDecoration(
-                            shape: BoxShape.circle,
+                            child: Image.network(
+                              'https://picsum.photos/seed/907/600',
+                            ),
                           ),
-                          child: Image.network(
-                            'https://picsum.photos/seed/907/600',
-                          ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              Container(
-                color: Colors.black26,
-              )
-            ],
+                const SizedBox(
+                  height: 4,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(12, 6, 12, 2),
+                    child: Container(
+                      width: size.width,
+                      height: double.infinity,
+                      alignment: Alignment.topCenter,
+                      decoration: BoxDecoration(
+                        color: Colors.indigo[400],
+                        borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black87.withOpacity(0.8),
+                            spreadRadius: 1,
+                            blurRadius: 1,
+                            offset: const Offset(0, 1),
+                          ),
+                        ],
+                      ),
+                      child: const PendingLoans(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
