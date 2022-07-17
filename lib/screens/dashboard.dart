@@ -9,6 +9,7 @@ import 'package:sampark/widgets/customerLists.dart';
 import 'package:sizer/sizer.dart';
 
 import '../utils/ad_helper.dart';
+import '../utils/prefs.dart';
 
 class Dashboard extends StatefulWidget {
   const Dashboard({Key? key}) : super(key: key);
@@ -24,12 +25,15 @@ Future<InitializationStatus> _initGoogleMobileAds() {
 class _DashboardState extends State<Dashboard> {
   late BannerAd _bannerAd;
   bool _isBannerAdReady = false;
+  String? empcode;
 
   @override
   void initState() {
     if (SizerUtil.deviceType == DeviceType.mobile) {
       _runAds();
     }
+    empcode = UserSimplePreferences.getUsername() ?? '';
+
     super.initState();
   }
 
@@ -402,5 +406,3 @@ class _DashboardState extends State<Dashboard> {
     _bannerAd.load();
   }
 }
-
-

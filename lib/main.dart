@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sampark/app.dart';
 import 'package:sampark/screens/login.dart';
+import 'package:sampark/utils/prefs.dart';
 import 'package:sizer/sizer.dart';
 
 Future<void> _backgroundHandler(RemoteMessage message) async {
@@ -15,6 +16,8 @@ Future<void> _backgroundHandler(RemoteMessage message) async {
 }
 
 List<String> testDeviceIds = ['2589CF5FD4D7E0134C7CC050F01300C4'];
+
+int? logstat;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,6 +28,8 @@ void main() async {
 
   MobileAds.instance.initialize();
   FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
+  await UserSimplePreferences.init();
+  logstat = UserSimplePreferences.getLogin();
 
   runApp(const MyApp());
 }
@@ -50,11 +55,12 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData.dark(),
           themeMode: ThemeMode.system,
-          home: const AuthScreen(),
-          /* const Home(
-            title: 'Sampark',
-            page: -1,
-          ), */
+          home: logstat != 1
+              ? const AuthScreen()
+              : const Home(
+                  title: 'Sampark',
+                  page: -1,
+                ),
         );
       },
     );

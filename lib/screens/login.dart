@@ -1,6 +1,5 @@
 // ignore_for_file: non_constant_identifier_names, unused_local_variable
 
-import 'package:easy_debounce/easy_debounce.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
@@ -9,6 +8,9 @@ import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sampark/app.dart';
 import 'package:sampark/utils/api.dart';
+import 'package:sampark/utils/prefs.dart';
+
+import 'collectEmi.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -163,19 +165,15 @@ class _AuthScreenState extends State<AuthScreen> {
                                   var response = await authUserCheck(
                                       emplcodeT, passwordT, tokenT);
 
-                                  if (response != false ||
+                                  if (response != false &&
                                       response['status'] == 1) {
+                                    setData(response['data'][0]['emp_code']);
+
                                     setState(() {
                                       showSpinner = false;
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(
                                         SnackBar(
-                                          action: SnackBarAction(
-                                            label: 'Close',
-                                            onPressed: () {
-                                              // Code to execute.
-                                            },
-                                          ),
                                           content: Text(response['msg']),
                                           duration: const Duration(
                                               milliseconds: 1500),
@@ -191,8 +189,9 @@ class _AuthScreenState extends State<AuthScreen> {
                                         ),
                                       );
                                     });
-                                    Get.to(
-                                        const Home(title: 'Sampark', page: 0));
+                                    /*  Get.to(
+                                        const Home(title: "Sampark", page: 0));
+                                   */
                                   } else {
                                     setState(() {
                                       showSpinner = false;
@@ -223,6 +222,11 @@ class _AuthScreenState extends State<AuthScreen> {
 
   getToken() async {
     fcmToken = await FirebaseMessaging.instance.getToken();
+  }
+
+  setData(String emplcodeT) async {
+    await UserSimplePreferences.setUsername(emplcodeT);
+    await UserSimplePreferences.setLogin(1);
   }
 }
 

@@ -6,9 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:fluttericon/typicons_icons.dart';
 import 'package:get/get.dart';
 import 'package:sampark/screens/addDocs.dart';
+import 'package:sampark/screens/agenScreen.dart';
 
 import 'package:sampark/utils/config.dart';
 import 'package:sampark/utils/api.dart';
+import 'package:sampark/utils/prefs.dart';
 import 'package:sampark/utils/push.dart';
 import 'package:sampark/widgets/navDrawer.dart';
 import 'package:sampark/widgets/topBar.dart';
@@ -37,6 +39,7 @@ class _HomeState extends State<Home> {
   dynamic vWeb = '';
   String message = '';
   String updateUri = '';
+  String usertype = 'agent';
 
   Future<void> getAppVersion() async {
     String vLocal = await PackageInfoApi.getAppVersion();
@@ -67,13 +70,14 @@ class _HomeState extends State<Home> {
 
   @override
   void initState() {
-    getAppVersion();
     super.initState();
+    getAppVersion();
     if (widget.page > 2) {
       selectedPage = widget.page;
     } else {
-      selectedPage = 1;
+      selectedPage = UserSimplePreferences.getLogin() ?? 0;
     }
+
     LocalNotificationService.initialize(context);
     FirebaseMessaging.instance.getInitialMessage().then(
       (message) {
@@ -103,7 +107,6 @@ class _HomeState extends State<Home> {
         }
       },
     );
-
     FirebaseMessaging.onMessageOpenedApp.listen(
       (message) {
         print("FirebaseMessaging.onMessageOpenedApp.listen");
@@ -118,7 +121,7 @@ class _HomeState extends State<Home> {
 
   final _pageOptions = const [
     AllCustomers(),
-    Dashboard(),
+    AgentScreen(),
     Reports(),
     AddNew(),
     AddLoan(),
