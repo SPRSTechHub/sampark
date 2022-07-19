@@ -78,6 +78,7 @@ Future<List<Pendingloanemi>?> getPendingEmi(
   if (response.statusCode == 200) {
     var rsp = jsonDecode(response.body);
     if (rsp['status'] == 1) {
+      print(jsonEncode(rsp['data']));
       return pendingloanemiFromJson(jsonEncode(rsp['data']));
     } else {
       return null;
@@ -93,6 +94,7 @@ Future<List<Pendingloandata>?> getPendingLoans(
   var client = http.Client();
   var uri = Uri.parse('https://play.liveipl.online/apifile/getPendingLoans/');
   final response = await client.post(uri, headers: headers, body: jsonBody);
+  //print(response.statusCode);
   if (response.statusCode == 200) {
     var rsp = jsonDecode(response.body);
     if (rsp['status'] == 1) {
@@ -236,6 +238,21 @@ Future getCbil(String mobile, String dataval) async {
   var jsonBody = {'checkby': mobile, 'dataval': dataval, 'action': 'chkcbil'};
   final response = await http.post(
       Uri.parse('https://play.liveipl.online/apifile/fetch_cibil/'),
+      headers: headers,
+      body: jsonBody);
+  if (response.statusCode == 200) {
+    var rsp = jsonDecode(response.body);
+    //  print(rsp);
+    return rsp;
+  } else {
+    return null;
+  }
+}
+
+Future updateEmi(String? emicod, String? emiamt) async {
+  var jsonBody = {'emi_amount': emiamt, 'emi_code': emicod, 'action': 'payEmi'};
+  final response = await http.post(
+      Uri.parse('https://play.liveipl.online/apifile/payEmi/'),
       headers: headers,
       body: jsonBody);
   if (response.statusCode == 200) {

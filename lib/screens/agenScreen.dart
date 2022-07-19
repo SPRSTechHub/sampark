@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttericon/linecons_icons.dart';
 import 'package:sampark/utils/prefs.dart';
 import 'package:sampark/widgets/pendingLoans.dart';
 
@@ -23,7 +24,7 @@ class _AgentScreenState extends State<AgentScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
+      body: SafeArea(
         child: SizedBox(
           height: size.height,
           width: size.width,
@@ -38,7 +39,7 @@ class _AgentScreenState extends State<AgentScreen> {
                   padding: const EdgeInsetsDirectional.fromSTEB(2, 0, 0, 0),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: 120,
+                    height: 80,
                     decoration: const BoxDecoration(
                       color: Color.fromARGB(255, 197, 201, 207),
                       borderRadius: BorderRadius.only(
@@ -80,8 +81,8 @@ class _AgentScreenState extends State<AgentScreen> {
                           ),
                           Container(
                             margin: const EdgeInsets.only(right: 10),
-                            width: 90,
-                            height: 90,
+                            width: 45,
+                            height: 45,
                             clipBehavior: Clip.antiAlias,
                             decoration: const BoxDecoration(
                               shape: BoxShape.circle,
@@ -93,6 +94,130 @@ class _AgentScreenState extends State<AgentScreen> {
                         ],
                       ),
                     ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0, 8, 0, 0),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.max,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          /* Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const Home(title: 'Sampark', page: 3)));
+                   */
+                        },
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    color: Color(0xFF033D8D),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Linecons.user,
+                                color: Colors.black,
+                                size: 24,
+                              ),
+                            ),
+                            const Text('Add New')
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    color: Color(0xFF033D8D),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Linecons.inbox,
+                                color: Colors.black,
+                                size: 24,
+                              ),
+                            ),
+                            const Text('Doc Upload')
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    color: Color(0xFF033D8D),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Linecons.wallet,
+                                color: Colors.black,
+                                size: 24,
+                              ),
+                            ),
+                            const Text('Payments')
+                          ],
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: () {},
+                        child: Column(
+                          children: [
+                            Container(
+                              width: 48,
+                              height: 48,
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                boxShadow: const [
+                                  BoxShadow(
+                                    blurRadius: 1,
+                                    color: Color(0xFF033D8D),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(12),
+                              ),
+                              child: const Icon(
+                                Linecons.note,
+                                color: Colors.black,
+                                size: 24,
+                              ),
+                            ),
+                            const Text('Reports')
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(

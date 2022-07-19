@@ -18,6 +18,9 @@ class AppColor {
 
   static Color emiScaffoldBgColor = const Color(0xFF607D8B);
   static Color emiContanerTransparent = const Color(0x721D1D1D);
+
+  static Color loanListTileBG = const Color.fromARGB(255, 251, 251, 251);
+  static Color emiListTileBG = const Color.fromARGB(255, 34, 24, 24);
 }
 
 class AppText {

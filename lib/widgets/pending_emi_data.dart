@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sampark/model/emipendings.dart';
 import 'package:sampark/utils/api.dart';
+import 'package:sampark/utils/prefs.dart';
+import 'package:sampark/utils/utils.dart';
 
+import 'emipayments.dart';
 
 class PendingEmis extends StatefulWidget {
   const PendingEmis({Key? key, required this.loanno}) : super(key: key);
@@ -13,17 +18,18 @@ class PendingEmis extends StatefulWidget {
 
 class _PendingEmisState extends State<PendingEmis> {
   List<Pendingloanemi>? emidata;
-
+  String? empcode;
   var isLoaded = false;
 
   @override
   void initState() {
     super.initState();
+    empcode = UserSimplePreferences.getUsername() ?? '';
     getData();
   }
 
   getData() async {
-    emidata = await getPendingEmi(widget.loanno, 'SMERR09', '17-07-2022');
+    emidata = await getPendingEmi(widget.loanno, empcode!, '17-07-2022');
     if (emidata != null) {
       if (!mounted) return;
       setState(() {
@@ -56,48 +62,44 @@ class _PendingEmisState extends State<PendingEmis> {
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 6.0),
                 child: Container(
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15.0),
-                      color: const Color.fromARGB(228, 0, 43, 122)),
+                      borderRadius: BorderRadius.circular(6.0),
+                      color: AppColor.emiListTileBG),
                   child: ListTile(
-                      onTap: () {
-                        /* Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => EmiProfile(
-                                ccode: emidata![index].date,
-                                loanno: emidata![index].loanNo),
-                          ),
-                        ); */
-                      },
-                      leading: const CircleAvatar(
-                        //  radius: 100,
-                        backgroundImage:
-                            AssetImage('assets/images/error_logo.png'),
-                      ),
+                      onTap: () => (emidata![index].emiCode != null)
+                          ? showCupertinoModalBottomSheet(
+                              expand: true,
+                              context: context,
+                              backgroundColor: Colors.transparent,
+                              builder: (context) => EmiPayModal(
+                                  emicode: emidata![index].emiCode,
+                                  agentcode: empcode,
+                                  emiamnt: emidata![index].emiAmount),
+                            )
+                          : Get.snackbar('Alert', 'Emi Code error!'),
                       title: Text(
-                        emidata![index].emiAmount,
+                        'Date:${emidata![index].date}',
                         style: const TextStyle(
                             color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                       subtitle: Column(
                         children: [
-                          Text(
-                            textAlign: TextAlign.left,
-                            'M: ${emidata![index].loanNo}',
-                            style: const TextStyle(
-                              color: Colors.white60,
-                            ),
-                          ),
                           const SizedBox(
-                            height: 10,
+                            height: 4,
+                          ),
+                          const Text('Click to Pay Emi',
+                              style: TextStyle(
+                                color: Colors.white,
+                              )),
+                          const SizedBox(
+                            height: 4,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
                               Text(
-                                'Loan:${emidata![index].emiAmount}',
+                                'Rs. ${emidata![index].emiAmount} /-',
                                 style: const TextStyle(
-                                  color: Colors.white60,
+                                  color: Colors.white,
                                 ),
                               ),
                               Text(

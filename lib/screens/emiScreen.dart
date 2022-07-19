@@ -32,7 +32,7 @@ class _EmiProfileState extends State<EmiProfile> {
                     width: MediaQuery.of(context).size.width,
                     height: 100,
                     decoration: BoxDecoration(
-                      color: AppColor.emiContanerTransparent,
+                      color: Colors.yellowAccent.shade400,
                       borderRadius: BorderRadius.circular(6),
                     ),
                     child: Padding(
@@ -46,13 +46,27 @@ class _EmiProfileState extends State<EmiProfile> {
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text(
-                                'Name',
-                                style: TextStyle(color: Colors.white),
-                              ),
                               Text(
-                                widget.ccode,
-                                style: const TextStyle(color: Colors.white),
+                                'Name: ${widget.ccode}',
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                              const Text(
+                                'M: 91XXXXXX03',
+                                style: TextStyle(color: Colors.black),
+                              ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisSize: MainAxisSize.max,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Customer Code: ${widget.ccode}',
+                                style: const TextStyle(color: Colors.black),
+                              ),
+                              const Text(
+                                'CIBIL: ***',
+                                style: TextStyle(color: Colors.black),
                               ),
                             ],
                           ),
@@ -61,12 +75,12 @@ class _EmiProfileState extends State<EmiProfile> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: const [
                               Text(
-                                'Hello World',
-                                style: TextStyle(color: Colors.white),
+                                'Loans: 1',
+                                style: TextStyle(color: Colors.black),
                               ),
                               Text(
-                                'Hello World',
-                                style: TextStyle(color: Colors.white),
+                                'Emi Count: 1/24',
+                                style: TextStyle(color: Colors.black),
                               ),
                             ],
                           ),

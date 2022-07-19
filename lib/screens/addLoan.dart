@@ -289,8 +289,7 @@ class _AddLoanState extends State<AddLoan> {
                                                                     'mobile',
                                                                     mobileController
                                                                         .text);
-                                                                // ignore: avoid_print
-                                                                //{}
+
                                                                 if (resp !=
                                                                     null) {
                                                                   Get.bottomSheet(
