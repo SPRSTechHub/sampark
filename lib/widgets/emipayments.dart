@@ -5,6 +5,8 @@ import 'package:sampark/utils/api.dart';
 import 'package:swipeable_button_view/swipeable_button_view.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
 
+import '../screens/agenScreen.dart';
+
 class EmiPayModal extends StatefulWidget {
   final String? agentcode;
   final String? emicode;
@@ -166,26 +168,38 @@ class _EmiPayModalState extends State<EmiPayModal> {
                                 var emicod = widget.emicode;
 
                                 var resp = await updateEmi(emicod, emiamt);
-                                print(resp);
+                                // print(resp);
                                 if (resp == null) {
                                   setState(() {
                                     shouldClose = true;
                                     Navigator.of(context).pop();
                                     isFinished = false;
-                                    Get.snackbar('title', 'EMI Not Updated!',
+                                    Get.snackbar('Alert', 'EMI Not Updated!',
                                         snackPosition: SnackPosition.BOTTOM,
                                         backgroundColor: Colors.red);
                                   });
                                 } else {
-                                  setState(() {
-                                    shouldClose = true;
-                                    Navigator.of(context).pop();
-                                    isFinished = false;
+                                  if (resp['status'] == 1) {
+                                    setState(() {
+                                      shouldClose = true;
+                                      isFinished = false;
 
-                                    Get.snackbar(
-                                        'title', 'EMI Updated Successfully!',
-                                        snackPosition: SnackPosition.BOTTOM);
-                                  });
+                                      Get.snackbar(
+                                          'Alert', 'EMI Updated Successfully!',
+                                          snackPosition: SnackPosition.BOTTOM);
+                                      Get.to(const AgentScreen());
+                                    });
+                                  } else {
+                                    setState(() {
+                                      shouldClose = true;
+                                      isFinished = false;
+
+                                      Get.snackbar(
+                                          'Alert', 'EMI Updated Successfully!',
+                                          snackPosition: SnackPosition.BOTTOM);
+                                      Navigator.of(context).pop();
+                                    });
+                                  }
                                 }
 /*                                 shouldClose = true;
                                 Navigator.of(context)
