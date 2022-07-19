@@ -7,10 +7,9 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sampark/app.dart';
+import 'package:sampark/main.dart';
 import 'package:sampark/utils/api.dart';
 import 'package:sampark/utils/prefs.dart';
-
-import 'collectEmi.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({Key? key}) : super(key: key);
@@ -165,9 +164,10 @@ class _AuthScreenState extends State<AuthScreen> {
                                   var response = await authUserCheck(
                                       emplcodeT, passwordT, tokenT);
 
-                                  if (response != false &&
-                                      response['status'] == 1) {
-                                    setData(response['data'][0]['emp_code']);
+                                  if (response['status'] == 1) {
+                                    if (response['data'][0]['emp_code'] != '') {
+                                      setData(response['data'][0]['emp_code']);
+                                    }
 
                                     setState(() {
                                       showSpinner = false;
@@ -189,9 +189,10 @@ class _AuthScreenState extends State<AuthScreen> {
                                         ),
                                       );
                                     });
-                                    /*  Get.to(
-                                        const Home(title: "Sampark", page: 0));
-                                   */
+                                    Get.to(const Home(
+                                      page: 0,
+                                      title: 'Sampark',
+                                    ));
                                   } else {
                                     setState(() {
                                       showSpinner = false;
