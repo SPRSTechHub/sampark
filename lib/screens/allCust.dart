@@ -1,7 +1,6 @@
 // ignore_for_file: must_call_super
 
 import 'package:flutter/material.dart';
-import 'package:fluttericon/linearicons_free_icons.dart';
 import 'package:sampark/model/allcustomers.dart';
 import 'package:sampark/screens/profileScreen.dart';
 import 'package:sampark/utils/api.dart';

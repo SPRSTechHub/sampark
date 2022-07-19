@@ -4,8 +4,8 @@ import 'package:sampark/utils/api.dart';
 import '../screens/emiScreen.dart';
 
 class PendingLoans extends StatefulWidget {
-  const PendingLoans({Key? key}) : super(key: key);
-
+  const PendingLoans({Key? key, required this.empcode}) : super(key: key);
+  final String empcode;
   @override
   State<PendingLoans> createState() => _PendingLoansState();
 }
@@ -15,14 +15,13 @@ class _PendingLoansState extends State<PendingLoans> {
   var isLoaded = false;
 
   @override
-  // ignore: must_call_super
   void initState() {
     super.initState();
-    getData();
+    getData(widget.empcode);
   }
 
-  getData() async {
-    emidata = await getPendingLoans('SMERR09', '17-07-2022');
+  getData(String empcode) async {
+    emidata = await getPendingLoans(empcode, '17-07-2022');
     if (emidata != null) {
       if (!mounted) return;
       setState(() {

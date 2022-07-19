@@ -24,7 +24,7 @@ class _AgentScreenState extends State<AgentScreen> {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       body: SingleChildScrollView(
-        child: Container(
+        child: SizedBox(
           height: size.height,
           width: size.width,
           child: GestureDetector(
@@ -119,7 +119,7 @@ class _AgentScreenState extends State<AgentScreen> {
                           ),
                         ],
                       ),
-                      child: const PendingLoans(),
+                      child: PendingLoans(empcode: empcode.toString()),
                     ),
                   ),
                 ),

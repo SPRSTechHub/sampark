@@ -334,7 +334,7 @@ class _DashboardState extends State<Dashboard> {
                 if (_isBannerAdReady)
                   Align(
                     alignment: Alignment.topCenter,
-                    child: Container(
+                    child: SizedBox(
                       width: _bannerAd.size.width.toDouble(),
                       height: _bannerAd.size.height.toDouble(),
                       child: AdWidget(ad: _bannerAd),

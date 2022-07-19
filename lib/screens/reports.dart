@@ -35,6 +35,10 @@ class _ReportsState extends State<Reports> {
     return SizedBox(
       child: Visibility(
         visible: isLoaded,
+        replacement: const Align(
+          alignment: Alignment.topCenter,
+          child: LinearProgressIndicator(),
+        ),
         child: ListView.builder(
             padding: EdgeInsets.zero,
             shrinkWrap: true,
@@ -52,10 +56,6 @@ class _ReportsState extends State<Reports> {
                 ),
               );
             }),
-        replacement: const Align(
-          alignment: Alignment.topCenter,
-          child: LinearProgressIndicator(),
-        ),
       ),
     );
   }

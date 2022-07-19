@@ -270,7 +270,7 @@ class _AddLoanState extends State<AddLoan> {
                                                         BorderRadius.circular(
                                                             10),
                                                   ),
-                                                  prefixIcon: IconTheme(
+                                                  prefixIcon: const IconTheme(
                                                       data: IconThemeData(
                                                           color: Colors.white),
                                                       child: Icon(Icons

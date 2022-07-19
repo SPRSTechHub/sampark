@@ -18,7 +18,6 @@ import 'package:sampark/widgets/topBar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'screens/allCust.dart';
-import 'screens/dashboard.dart';
 import 'screens/addLoan.dart';
 import 'screens/addnew.dart';
 import 'screens/collectEmi.dart';
@@ -110,11 +109,11 @@ class _HomeState extends State<Home> {
     );
     FirebaseMessaging.onMessageOpenedApp.listen(
       (message) {
-        print("FirebaseMessaging.onMessageOpenedApp.listen");
+       // print("FirebaseMessaging.onMessageOpenedApp.listen");
         if (message.notification != null) {
-          print(message.notification!.title);
-          print(message.notification!.body);
-          print("message.data22 ${message.data['_id']}");
+        //  print(message.notification!.title);
+//print(message.notification!.body);
+       //   print("message.data22 ${message.data['_id']}");
         }
       },
     );

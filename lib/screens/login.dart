@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:sampark/app.dart';
-import 'package:sampark/main.dart';
 import 'package:sampark/utils/api.dart';
 import 'package:sampark/utils/prefs.dart';
 
@@ -189,10 +188,10 @@ class _AuthScreenState extends State<AuthScreen> {
                                         ),
                                       );
                                     });
-                                    Get.to(const Home(
-                                      page: 0,
-                                      title: 'Sampark',
-                                    ));
+                                    Get.to(() => const Home(
+                                          page: 0,
+                                          title: 'Sampark',
+                                        ));
                                   } else {
                                     setState(() {
                                       showSpinner = false;

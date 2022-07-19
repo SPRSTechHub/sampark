@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:flutter/material.dart';
 
 class NavDrawer extends StatelessWidget {
@@ -32,10 +34,22 @@ class NavDrawer extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
+        ListTile(
+          title: const Text('ss'),
+          leading: const Icon(Icons.comment),
+          onTap: () {
+            logout();
+            // Navigator.pop(context);
+          },
+        ),
       ],
     );
     return Drawer(
         child: Container(
             color: const Color.fromARGB(255, 19, 31, 170), child: drawerItems));
   }
+}
+
+Future<void> logout() async {
+  // await prefs.remove('counter');
 }

@@ -11,8 +11,8 @@ import 'package:sampark/utils/prefs.dart';
 import 'package:sizer/sizer.dart';
 
 Future<void> _backgroundHandler(RemoteMessage message) async {
-  print(message.data.toString());
-  print(message.notification!.title);
+//print(message.data.toString());
+  // print(message.notification!.title);
 }
 
 List<String> testDeviceIds = ['2589CF5FD4D7E0134C7CC050F01300C4'];

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustProfile extends StatefulWidget {
@@ -21,7 +20,7 @@ class _CustProfileState extends State<CustProfile> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('Back'),
+            child: const Text('Back'),
           ),
         ],
       ),

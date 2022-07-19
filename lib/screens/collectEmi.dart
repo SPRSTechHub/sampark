@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:sampark/utils/prefs.dart';
 
 class CollectEmi extends StatefulWidget {
   const CollectEmi({Key? key}) : super(key: key);
@@ -18,6 +17,6 @@ class _CollectEmiState extends State<CollectEmi> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text('emi collection form'));
+    return Container(child: const Text('emi collection form'));
   }
 }

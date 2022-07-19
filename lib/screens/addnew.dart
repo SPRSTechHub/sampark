@@ -582,10 +582,10 @@ class _AddNewState extends State<AddNew> {
                                             setState(() {
                                               showSpinner = true;
                                             });
-                                            var f_name = f_name_Controller.text;
-                                            var l_name = l_name_Controller.text;
+                                            var fName = f_name_Controller.text;
+                                            var lName = l_name_Controller.text;
                                             var mobile = mobile_Controller.text;
-                                            var alt_mob =
+                                            var altMob =
                                                 alt_mobile_Controller.text;
                                             var address =
                                                 address_Controller.text;
@@ -620,10 +620,10 @@ class _AddNewState extends State<AddNew> {
                                             );
                                             var response =
                                                 await customerRegistration(
-                                                    f_name,
-                                                    l_name,
+                                                    fName,
+                                                    lName,
                                                     mobile,
-                                                    alt_mob,
+                                                    altMob,
                                                     gen,
                                                     address,
                                                     dob);
@@ -694,7 +694,7 @@ class _AddNewState extends State<AddNew> {
                   if (_isBannerAdReady)
                     Align(
                       alignment: Alignment.topCenter,
-                      child: Container(
+                      child: SizedBox(
                         width: _bannerAd.size.width.toDouble(),
                         height: _bannerAd.size.height.toDouble(),
                         child: AdWidget(ad: _bannerAd),

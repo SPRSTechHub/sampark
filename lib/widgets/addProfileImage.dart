@@ -10,6 +10,6 @@ class AddCustImage extends StatefulWidget {
 class _AddCustImageState extends State<AddCustImage> {
   @override
   Widget build(BuildContext context) {
-    return Container(child: Text('image upload'));
+    return Container(child: const Text('image upload'));
   }
 }

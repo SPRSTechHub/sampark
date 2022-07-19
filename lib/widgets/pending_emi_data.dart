@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:sampark/model/emipendings.dart';
 import 'package:sampark/utils/api.dart';
 
-import '../screens/emiScreen.dart';
 
 class PendingEmis extends StatefulWidget {
   const PendingEmis({Key? key, required this.loanno}) : super(key: key);
