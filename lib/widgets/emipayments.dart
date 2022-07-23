@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -6,6 +9,7 @@ import 'package:swipeable_button_view/swipeable_button_view.dart';
 import 'package:fluttericon/linearicons_free_icons.dart';
 
 import '../screens/agenScreen.dart';
+import '../utils/prefs.dart';
 
 class EmiPayModal extends StatefulWidget {
   final String? agentcode;
@@ -27,16 +31,19 @@ class _EmiPayModalState extends State<EmiPayModal> {
   bool isFinished = false;
   bool shouldClose = true;
   final _formKey = GlobalKey<FormState>();
+  late dynamic fcmToken;
+
   @override
   void initState() {
     super.initState();
+    fcmToken = UserSimplePreferences.getToken() ?? 'no token';
+
     emiamnttxt = TextEditingController(text: widget.emiamnt?.toString());
   }
 
   @override
   void dispose() {
     super.dispose();
-    //_bannerAd.dispose();
     emiamnttxt.dispose();
   }
 
@@ -82,7 +89,7 @@ class _EmiPayModalState extends State<EmiPayModal> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              color: Colors.amber,
+              color: Colors.amberAccent.shade100,
               height: 100,
               child: const Center(
                 child: Text('SAMPARK LOAN PAY',
@@ -95,7 +102,7 @@ class _EmiPayModalState extends State<EmiPayModal> {
             Expanded(
               flex: 1,
               child: Container(
-                color: Colors.amber,
+                color: Colors.amberAccent.shade100,
                 padding: const EdgeInsets.all(10.0),
                 child: Form(
                   child: Column(
@@ -167,8 +174,9 @@ class _EmiPayModalState extends State<EmiPayModal> {
                                 var emiamt = emiamnttxt.text;
                                 var emicod = widget.emicode;
 
-                                var resp = await updateEmi(emicod, emiamt);
-                                // print(resp);
+                                var resp =
+                                    await updateEmi(emicod, emiamt, fcmToken);
+
                                 if (resp == null) {
                                   setState(() {
                                     shouldClose = true;
@@ -220,7 +228,31 @@ class _EmiPayModalState extends State<EmiPayModal> {
                 ),
               ),
             ),
-            Container(color: Colors.amber, height: 100),
+            Container(
+              alignment: const Alignment(0.5, 1),
+              child: FacebookBannerAd(
+                placementId: Platform.isAndroid
+                    ? "422049633206700_424121256332871"
+                    : "YOUR_IOS_PLACEMENT_ID",
+                bannerSize: BannerSize.STANDARD,
+                listener: (result, value) {
+                  switch (result) {
+                    case BannerAdResult.ERROR:
+                      print("Error: $value");
+                      break;
+                    case BannerAdResult.LOADED:
+                      print("Loaded: $value");
+                      break;
+                    case BannerAdResult.CLICKED:
+                      print("Clicked: $value");
+                      break;
+                    case BannerAdResult.LOGGING_IMPRESSION:
+                      print("Logging Impression: $value");
+                      break;
+                  }
+                },
+              ),
+            )
           ],
         )),
       ),

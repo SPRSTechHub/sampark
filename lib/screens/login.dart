@@ -35,7 +35,6 @@ class _AuthScreenState extends State<AuthScreen> {
   void dispose() {
     emplcode.dispose();
     password.dispose();
-
     super.dispose();
   }
 
@@ -227,6 +226,7 @@ class _AuthScreenState extends State<AuthScreen> {
   setData(String emplcodeT) async {
     await UserSimplePreferences.setUsername(emplcodeT);
     await UserSimplePreferences.setLogin(1);
+    await UserSimplePreferences.setToken(fcmToken);
   }
 }
 

@@ -38,9 +38,9 @@ class _AgentScreenState extends State<AgentScreen> {
                   child: Container(
                     width: MediaQuery.of(context).size.width,
                     height: 80,
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 197, 201, 207),
-                      borderRadius: BorderRadius.only(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade300,
+                      borderRadius: const BorderRadius.only(
                         bottomLeft: Radius.circular(100),
                         bottomRight: Radius.circular(0),
                         topLeft: Radius.circular(0),
@@ -60,8 +60,8 @@ class _AgentScreenState extends State<AgentScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text('Hey ${empcode ?? 'No Name'} ,',
-                                  style: TextStyle(
-                                      color: Colors.grey[800],
+                                  style: const TextStyle(
+                                      color: Color.fromARGB(255, 255, 165, 10),
                                       fontWeight: FontWeight.bold,
                                       fontSize: 26)),
                               const SizedBox(
@@ -70,8 +70,8 @@ class _AgentScreenState extends State<AgentScreen> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 22),
                                 child: Text(greetings(),
-                                    style: TextStyle(
-                                        color: Colors.grey[800],
+                                    style: const TextStyle(
+                                        color: Color.fromARGB(255, 0, 125, 235),
                                         fontWeight: FontWeight.bold,
                                         fontSize: 20)),
                               ),
@@ -229,7 +229,7 @@ class _AgentScreenState extends State<AgentScreen> {
                       height: double.infinity,
                       alignment: Alignment.topCenter,
                       decoration: BoxDecoration(
-                        color: Colors.indigo[400],
+                        color: Colors.grey.shade300,
                         borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),

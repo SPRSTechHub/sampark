@@ -6,6 +6,7 @@ class UserSimplePreferences {
 
   static const _keyEmpCode = 'empcode';
   static const _keyLoginStatus = '';
+  static const _keyToken = 'fcmKey';
 
   static Future init() async =>
       _preferences = await SharedPreferences.getInstance();
@@ -19,4 +20,9 @@ class UserSimplePreferences {
       await _preferences!.setInt(_keyLoginStatus, lstats);
 
   static int? getLogin() => _preferences!.getInt(_keyLoginStatus);
+
+  static Future setToken(String fcmToken) async =>
+      await _preferences!.setString(_keyToken, fcmToken);
+
+  static String? getToken() => _preferences!.getString(_keyToken);
 }

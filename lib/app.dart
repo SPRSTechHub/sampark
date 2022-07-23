@@ -20,7 +20,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'screens/allCust.dart';
 import 'screens/addLoan.dart';
 import 'screens/addnew.dart';
-import 'screens/collectEmi.dart';
 import 'screens/reports.dart';
 
 class Home extends StatefulWidget {
@@ -121,13 +120,11 @@ class _HomeState extends State<Home> {
 
   final _pageOptions = const [
     AllCustomers(),
-    // CollectEmi(),
     AgentScreen(),
     // Dashboard(),
     Reports(),
     AddNew(),
     AddLoan(),
-    CollectEmi(),
     DocVrf(ccode: null)
   ];
 

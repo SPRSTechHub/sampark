@@ -239,10 +239,3 @@ class _EmiProfileState extends State<EmiProfile> {
     );
   }
 }
-
-
-/*
-Container(
-      child: Text(widget.ccode),
-    );
-    */

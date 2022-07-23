@@ -246,14 +246,20 @@ Future getCbil(String mobile, String dataval) async {
   }
 }
 
-Future updateEmi(String? emicod, String? emiamt) async {
-  var jsonBody = {'emi_amount': emiamt, 'emi_code': emicod, 'action': 'payEmi'};
+Future updateEmi(String? emicod, String? emiamt, dynamic tokenT) async {
+  var jsonBody = {
+    'emi_amount': emiamt,
+    'emi_code': emicod,
+    'action': 'payEmi',
+    'fcmKey': tokenT ?? 'null',
+  };
   final response = await http.post(
       Uri.parse('https://sampark.sprs.store/apifile/payEmi/'),
       headers: headers,
       body: jsonBody);
   if (response.statusCode == 200) {
     var rsp = jsonDecode(response.body);
+    print(rsp);
     return rsp;
   } else {
     return null;

@@ -1,3 +1,4 @@
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -20,12 +21,39 @@ class _PendingEmisState extends State<PendingEmis> {
   List<Pendingloanemi>? emidata;
   String? empcode;
   var isLoaded = false;
+  String? fbplacementId = '422049633206700_424116752999988';
+  bool _isInterstitialAdLoaded = false;
 
   @override
   void initState() {
     super.initState();
     empcode = UserSimplePreferences.getUsername() ?? '';
     getData();
+
+    _loadInterstitialAd(fbplacementId);
+  }
+
+  void _loadInterstitialAd(fbplacementId) {
+    FacebookRewardedVideoAd.loadRewardedVideoAd(
+      placementId: fbplacementId,
+      listener: (result, value) {
+        if (result == InterstitialAdResult.LOADED) {
+          _isInterstitialAdLoaded = true;
+        }
+        FacebookRewardedVideoAd.showRewardedVideoAd();
+        if (result == InterstitialAdResult.DISMISSED) {
+          //print("Video completed");
+        }
+      },
+    );
+  }
+
+  _showInterstitialAd() {
+    if (_isInterstitialAdLoaded == true) {
+      FacebookInterstitialAd.showInterstitialAd();
+    } else {
+      print("Interstial Ad not yet loaded!");
+    }
   }
 
   getData() async {
@@ -33,6 +61,7 @@ class _PendingEmisState extends State<PendingEmis> {
     if (emidata != null) {
       if (!mounted) return;
       setState(() {
+        _showInterstitialAd();
         isLoaded = true;
       });
     }

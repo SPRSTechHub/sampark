@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -25,8 +26,11 @@ void main() async {
   RequestConfiguration configuration =
       RequestConfiguration(testDeviceIds: testDeviceIds);
   MobileAds.instance.updateRequestConfiguration(configuration);
-
   MobileAds.instance.initialize();
+  FacebookAudienceNetwork.init(
+      testingId: "f71c4e8d-05db-43b3-ad71-7dae52aeb6a7", //optional
+      iOSAdvertiserTrackingEnabled: false //default false
+      );
   FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
   await UserSimplePreferences.init();
   logstat = UserSimplePreferences.getLogin();

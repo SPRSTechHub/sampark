@@ -1,5 +1,6 @@
 import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:sampark/model/emipendings.dart';
 import 'package:sampark/utils/api.dart';
 import '../screens/emiScreen.dart';
@@ -20,11 +21,6 @@ class _PendingLoansState extends State<PendingLoans> {
   void initState() {
     super.initState();
     getData(widget.empcode);
-
-    FacebookAudienceNetwork.init(
-        //  testingId: "f71c4e8d-05db-43b3-ad71-7dae52aeb6a7", //optional
-        iOSAdvertiserTrackingEnabled: false //default false
-        );
     _loadInterstitialAd();
   }
 
@@ -40,11 +36,24 @@ class _PendingLoansState extends State<PendingLoans> {
   }
 
   void _loadInterstitialAd() {
-    FacebookInterstitialAd.loadInterstitialAd(
+    FacebookRewardedVideoAd.loadRewardedVideoAd(
+      placementId: "422049633206700_422070283204635",
+      listener: (result, value) {
+        if (result == InterstitialAdResult.LOADED) {
+          _isInterstitialAdLoaded = true;
+          Get.snackbar('title', 'add loaded');
+        }
+        FacebookRewardedVideoAd.showRewardedVideoAd();
+        if (result == InterstitialAdResult.DISMISSED) {
+          //print("Video completed");
+        }
+      },
+    );
+/*     FacebookInterstitialAd.loadInterstitialAd(
       // placementId: "YOUR_PLACEMENT_ID",
       placementId: "IMG_16_9_APP_INSTALL#422049633206700_422070283204635",
       listener: (result, value) {
-        print(">> FAN > Interstitial Ad: $result --> $value");
+       // print(">> FAN > Interstitial Ad: $result --> $value");
         if (result == InterstitialAdResult.LOADED) {
           _isInterstitialAdLoaded = true;
         }
@@ -57,7 +66,7 @@ class _PendingLoansState extends State<PendingLoans> {
           _loadInterstitialAd();
         }
       },
-    );
+    ); */
   }
 
   _showInterstitialAd() {
