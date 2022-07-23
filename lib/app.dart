@@ -109,11 +109,11 @@ class _HomeState extends State<Home> {
     );
     FirebaseMessaging.onMessageOpenedApp.listen(
       (message) {
-       // print("FirebaseMessaging.onMessageOpenedApp.listen");
+        // print("FirebaseMessaging.onMessageOpenedApp.listen");
         if (message.notification != null) {
-        //  print(message.notification!.title);
+          //  print(message.notification!.title);
 //print(message.notification!.body);
-       //   print("message.data22 ${message.data['_id']}");
+          //   print("message.data22 ${message.data['_id']}");
         }
       },
     );
@@ -121,6 +121,7 @@ class _HomeState extends State<Home> {
 
   final _pageOptions = const [
     AllCustomers(),
+    // CollectEmi(),
     AgentScreen(),
     // Dashboard(),
     Reports(),

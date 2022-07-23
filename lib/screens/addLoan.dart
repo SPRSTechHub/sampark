@@ -297,7 +297,7 @@ class _AddLoanState extends State<AddLoan> {
                                                                         context:
                                                                             context,
                                                                         profileurl:
-                                                                            'https://play.liveipl.online/uploads/149377355.jpg',
+                                                                            'https://sampark.sprs.store/uploads/149377355.jpg',
                                                                         pan:
                                                                             '1',
                                                                         adhaar:
@@ -885,7 +885,7 @@ class _AddLoanState extends State<AddLoan> {
   }
 }
 
-//'profile_url': 'https://play.liveipl.online/uploads/149377355.jpg', 'profile': '1', 'pan': '1', 'adhaar': '1', 'count': '1', 'cbil': '800'
+//'profile_url': 'https://sampark.sprs.store/uploads/149377355.jpg', 'profile': '1', 'pan': '1', 'adhaar': '1', 'count': '1', 'cbil': '800'
 // ignore: camel_case_types
 class customerCard extends StatelessWidget {
   final String? profileurl;

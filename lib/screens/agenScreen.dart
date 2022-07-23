@@ -12,11 +12,9 @@ class AgentScreen extends StatefulWidget {
 
 class _AgentScreenState extends State<AgentScreen> {
   String? empcode;
-
   @override
   void initState() {
     empcode = UserSimplePreferences.getUsername() ?? '';
-
     super.initState();
   }
 

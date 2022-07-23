@@ -69,7 +69,7 @@ class _CustomerListsState extends State<CustomerLists> {
                             child: Image.asset(
                                 'assets/images/error_logo.png'), /* FadeInImage(
                               image: NetworkImage(
-                                  'https://play.liveipl.online/uploads/${customer![index].imgLink}'),
+                                  'https://sampark.sprs.store/uploads/${customer![index].imgLink}'),
                               placeholder: const AssetImage(
                                   'assets/images/error_logo.png'),
                             ), */

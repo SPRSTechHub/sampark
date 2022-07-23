@@ -1,3 +1,4 @@
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:sampark/model/emipendings.dart';
 import 'package:sampark/utils/api.dart';
@@ -13,11 +14,18 @@ class PendingLoans extends StatefulWidget {
 class _PendingLoansState extends State<PendingLoans> {
   List<Pendingloandata>? emidata;
   var isLoaded = false;
+  bool _isInterstitialAdLoaded = false;
 
   @override
   void initState() {
     super.initState();
     getData(widget.empcode);
+
+    FacebookAudienceNetwork.init(
+        //  testingId: "f71c4e8d-05db-43b3-ad71-7dae52aeb6a7", //optional
+        iOSAdvertiserTrackingEnabled: false //default false
+        );
+    _loadInterstitialAd();
   }
 
   getData(String empcode) async {
@@ -25,8 +33,38 @@ class _PendingLoansState extends State<PendingLoans> {
     if (emidata != null) {
       if (!mounted) return;
       setState(() {
+        _showInterstitialAd();
         isLoaded = true;
       });
+    }
+  }
+
+  void _loadInterstitialAd() {
+    FacebookInterstitialAd.loadInterstitialAd(
+      // placementId: "YOUR_PLACEMENT_ID",
+      placementId: "IMG_16_9_APP_INSTALL#422049633206700_422070283204635",
+      listener: (result, value) {
+        print(">> FAN > Interstitial Ad: $result --> $value");
+        if (result == InterstitialAdResult.LOADED) {
+          _isInterstitialAdLoaded = true;
+        }
+
+        /// Once an Interstitial Ad has been dismissed and becomes invalidated,
+        /// load a fresh Ad by calling this function.
+        if (result == InterstitialAdResult.DISMISSED &&
+            value["invalidated"] == true) {
+          _isInterstitialAdLoaded = false;
+          _loadInterstitialAd();
+        }
+      },
+    );
+  }
+
+  _showInterstitialAd() {
+    if (_isInterstitialAdLoaded == true) {
+      FacebookInterstitialAd.showInterstitialAd();
+    } else {
+      print("Interstial Ad not yet loaded!");
     }
   }
 

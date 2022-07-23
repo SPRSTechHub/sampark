@@ -72,7 +72,7 @@ class _AllCustomersState extends State<AllCustomers> {
                           ? CircleAvatar(
                               radius: 28,
                               backgroundImage: NetworkImage(
-                                  'https://play.liveipl.online/uploads/${customer![index].imgLink}'),
+                                  'https://sampark.sprs.store/uploads/${customer![index].imgLink}'),
                             )
                           : const CircleAvatar(
                               //  radius: 100,

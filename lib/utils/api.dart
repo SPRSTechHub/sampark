@@ -14,7 +14,7 @@ Map<String, String> headers = {
 Future getAccess(String? token) async {
   var jsonBody = {'token': token ?? 'null', 'action': 'authchk'};
   final response = await http.post(
-      Uri.parse('https://play.liveipl.online/apifile/authchecker/'),
+      Uri.parse('https://sampark.sprs.store/apifile/authchecker/'),
       headers: headers,
       body: jsonBody);
   if (response.statusCode == 200) {
@@ -35,7 +35,7 @@ Future authUserCheck(
   };
 
   final response = await http.post(
-      Uri.parse('https://play.liveipl.online/apifile/login/'),
+      Uri.parse('https://sampark.sprs.store/apifile/login/'),
       headers: headers,
       body: jsonBody);
   if (response.statusCode == 200) {
@@ -50,7 +50,7 @@ Future<List<AllCustomersData>?> getAllCustomers() async {
   var jsonBody = {'action': 'getdata'};
 
   var client = http.Client();
-  var uri = Uri.parse('https://play.liveipl.online/apifile/getAllCustomers/');
+  var uri = Uri.parse('https://sampark.sprs.store/apifile/getAllCustomers/');
   final response = await client.post(uri, headers: headers, body: jsonBody);
   if (response.statusCode == 200) {
     var rsp = jsonDecode(response.body);
@@ -73,7 +73,7 @@ Future<List<Pendingloanemi>?> getPendingEmi(
   };
 
   var client = http.Client();
-  var uri = Uri.parse('https://play.liveipl.online/apifile/getPendingEmi/');
+  var uri = Uri.parse('https://sampark.sprs.store/apifile/getPendingEmi/');
   final response = await client.post(uri, headers: headers, body: jsonBody);
   if (response.statusCode == 200) {
     var rsp = jsonDecode(response.body);
@@ -91,7 +91,7 @@ Future<List<Pendingloandata>?> getPendingLoans(
   var jsonBody = {'action': 'pending_emi', 'emp_code': empcode, 'date': date};
 
   var client = http.Client();
-  var uri = Uri.parse('https://play.liveipl.online/apifile/getPendingLoans/');
+  var uri = Uri.parse('https://sampark.sprs.store/apifile/getPendingLoans/');
   final response = await client.post(uri, headers: headers, body: jsonBody);
   if (response.statusCode == 200) {
     var rsp = jsonDecode(response.body);
@@ -108,7 +108,7 @@ Future<List<Customer>?> getCustomers(String mobile) async {
   var jsonBody = {'mobile': mobile, 'action': 'getdata'};
 
   var client = http.Client();
-  var uri = Uri.parse('https://play.liveipl.online/apifile/getCustomer/');
+  var uri = Uri.parse('https://sampark.sprs.store/apifile/getCustomer/');
   final response = await client.post(uri, headers: headers, body: jsonBody);
   if (response.statusCode == 200) {
     var rsp = jsonDecode(response.body);
@@ -124,7 +124,7 @@ Future<List<Customer>?> getCustomers(String mobile) async {
 Future getCust(String mobile) async {
   var jsonBody = {'mobile': mobile, 'action': 'checkdata'};
   final response = await http.post(
-      Uri.parse('https://play.liveipl.online/apifile/chkCustomer/'),
+      Uri.parse('https://sampark.sprs.store/apifile/chkCustomer/'),
       headers: headers,
       body: jsonBody);
   if (response.statusCode == 200) {
@@ -148,7 +148,7 @@ Future addLoanFunc(String mobile, String custCode, String emiAmnt,
     'action': 'add_new_loan'
   };
   final response = await http.post(
-      Uri.parse('https://play.liveipl.online/apifile/add_cust_loan/'),
+      Uri.parse('https://sampark.sprs.store/apifile/add_cust_loan/'),
       headers: headers,
       body: jsonBody);
   if (response.statusCode == 200) {
@@ -162,7 +162,7 @@ Future uploadImage(String ccode, File? image) async {
   var stream = http.ByteStream(image!.openRead());
   stream.cast();
   var req = http.MultipartRequest(
-      "POST", Uri.parse('https://play.liveipl.online/apifile/add_cust_image'));
+      "POST", Uri.parse('https://sampark.sprs.store/apifile/add_cust_image'));
   req.headers["Content-type"] = "application/x-www-form-urlencoded";
   req.fields["id"] = ccode; //ccode;
   req.fields["action"] = 'avatarUploader';
@@ -185,7 +185,7 @@ Future<dynamic> uploadDocs(
   var stream = http.ByteStream(image!.openRead());
   stream.cast();
   var req = http.MultipartRequest(
-      "POST", Uri.parse('https://play.liveipl.online/apifile/add_cust_docs'));
+      "POST", Uri.parse('https://sampark.sprs.store/apifile/add_cust_docs'));
   req.headers["Content-type"] = "application/x-www-form-urlencoded";
   req.fields["cust_code"] = ccode;
   req.fields["doc_type"] = type!;
@@ -219,7 +219,7 @@ Future customerRegistration(
   };
 
   final response = await http.post(
-      Uri.parse('https://play.liveipl.online/apifile/add_cust/'),
+      Uri.parse('https://sampark.sprs.store/apifile/add_cust/'),
       headers: headers,
       body: jsonBody);
 
@@ -235,7 +235,7 @@ Future customerRegistration(
 Future getCbil(String mobile, String dataval) async {
   var jsonBody = {'checkby': mobile, 'dataval': dataval, 'action': 'chkcbil'};
   final response = await http.post(
-      Uri.parse('https://play.liveipl.online/apifile/fetch_cibil/'),
+      Uri.parse('https://sampark.sprs.store/apifile/fetch_cibil/'),
       headers: headers,
       body: jsonBody);
   if (response.statusCode == 200) {
@@ -249,7 +249,7 @@ Future getCbil(String mobile, String dataval) async {
 Future updateEmi(String? emicod, String? emiamt) async {
   var jsonBody = {'emi_amount': emiamt, 'emi_code': emicod, 'action': 'payEmi'};
   final response = await http.post(
-      Uri.parse('https://play.liveipl.online/apifile/payEmi/'),
+      Uri.parse('https://sampark.sprs.store/apifile/payEmi/'),
       headers: headers,
       body: jsonBody);
   if (response.statusCode == 200) {
