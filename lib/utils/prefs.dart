@@ -25,4 +25,5 @@ class UserSimplePreferences {
       await _preferences!.setString(_keyToken, fcmToken);
 
   static String? getToken() => _preferences!.getString(_keyToken);
+  static Future logMeOut() async => await _preferences!.clear();
 }

@@ -34,7 +34,6 @@ class _DashboardState extends State<Dashboard> {
       _runAds();
     }
     empcode = UserSimplePreferences.getUsername() ?? '';
-
     super.initState();
   }
 

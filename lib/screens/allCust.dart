@@ -1,5 +1,6 @@
 // ignore_for_file: must_call_super
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:sampark/model/allcustomers.dart';
 import 'package:sampark/screens/profileScreen.dart';
@@ -68,18 +69,26 @@ class _AllCustomersState extends State<AllCustomers> {
                           ),
                         );
                       },
-                      leading: customer![index].imgLink != null
-                          ? CircleAvatar(
-                              radius: 28,
-                              backgroundImage: NetworkImage(
-                                  'https://sampark.sprs.store/uploads/${customer![index].imgLink}'),
+                      leading: const CircleAvatar(
+                        //  radius: 100,
+                        backgroundImage:
+                            AssetImage('assets/images/error_logo.png'),
+                      ),
+
+                      /* customer![index].imgLink != null
+                          ? Image.network(
+                              "https://sampark.sprs.store/uploads/${customer![index].imgLink}",
+                              errorBuilder: (BuildContext context,
+                                  Object exception, StackTrace? stackTrace) {
+                                return const Text('ð¢');
+                              },
                             )
                           : const CircleAvatar(
                               //  radius: 100,
                               backgroundImage:
                                   AssetImage('assets/images/error_logo.png'),
                             ),
-                      // ignore: unnecessary_null_comparison
+                       */ // ignore: unnecessary_null_comparison
                       title: Text(
                         customer![index].name,
                         style: const TextStyle(

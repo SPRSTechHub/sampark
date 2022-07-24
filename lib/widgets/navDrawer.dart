@@ -1,19 +1,24 @@
 // ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:sampark/utils/prefs.dart';
+
+import '../screens/login.dart';
 
 class NavDrawer extends StatelessWidget {
-  const NavDrawer({Key? key}) : super(key: key);
+  const NavDrawer({Key? key, this.uname}) : super(key: key);
+  final String? uname;
 
   @override
   Widget build(BuildContext context) {
-    const drawerHeader = UserAccountsDrawerHeader(
-      decoration: BoxDecoration(
+    final drawerHeader = UserAccountsDrawerHeader(
+      decoration: const BoxDecoration(
         color: Color.fromARGB(255, 27, 35, 130),
       ),
-      accountName: Text('ff'),
-      accountEmail: Text('ff'),
-      currentAccountPicture: CircleAvatar(
+      accountName: Text(uname!),
+      accountEmail: const Text('ff'),
+      currentAccountPicture: const CircleAvatar(
         child: FlutterLogo(size: 42.0),
       ),
     );
@@ -28,14 +33,14 @@ class NavDrawer extends StatelessWidget {
           },
         ),
         ListTile(
-          title: const Text('ss'),
+          title: Text(uname!),
           leading: const Icon(Icons.comment),
           onTap: () {
             Navigator.pop(context);
           },
         ),
         ListTile(
-          title: const Text('ss'),
+          title: const Text('Logout'),
           leading: const Icon(Icons.comment),
           onTap: () {
             logout();
@@ -51,5 +56,6 @@ class NavDrawer extends StatelessWidget {
 }
 
 Future<void> logout() async {
-  // await prefs.remove('counter');
+  await UserSimplePreferences.logMeOut();
+  Get.to(const AuthScreen());
 }

@@ -225,7 +225,11 @@ class _AuthScreenState extends State<AuthScreen> {
 
   setData(String emplcodeT) async {
     await UserSimplePreferences.setUsername(emplcodeT);
-    await UserSimplePreferences.setLogin(1);
+    if (emplcodeT == 'ADMINSMPK') {
+      await UserSimplePreferences.setLogin(7);
+    } else {
+      await UserSimplePreferences.setLogin(1);
+    }
     await UserSimplePreferences.setToken(fcmToken);
   }
 }

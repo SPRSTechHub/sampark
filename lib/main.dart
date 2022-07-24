@@ -16,7 +16,7 @@ Future<void> _backgroundHandler(RemoteMessage message) async {
   // print(message.notification!.title);
 }
 
-List<String> testDeviceIds = ['2589CF5FD4D7E0134C7CC050F01300C4'];
+List<String> testDeviceIds = ['A523AC374E75B4FD4F84EFFCEDE57AF1'];
 
 int? logstat;
 
@@ -59,20 +59,18 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData.dark(),
           themeMode: ThemeMode.system,
-          home: logstat != 1
-              ? const AuthScreen()
-              : const Home(
+          home: logstat != null
+              //? const AuthScreen()
+              ? const Home(
                   title: 'Sampark',
                   page: -1,
-                ),
+                )
+              : const AuthScreen(),
         );
       },
     );
   }
 }
-
-//  final fcmToken = await FirebaseMessaging.instance.getToken();
-// print(fcmToken);
 
 class AppScrollBehavior extends MaterialScrollBehavior {
   @override

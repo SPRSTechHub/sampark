@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 //import 'package:sampark/model/extra.dart';
 import 'package:sampark/screens/addDocs.dart';
 import 'package:sampark/screens/agenScreen.dart';
+import 'package:sampark/screens/dashboard.dart';
 
 import 'package:sampark/utils/config.dart';
 import 'package:sampark/utils/api.dart';
@@ -38,7 +39,8 @@ class _HomeState extends State<Home> {
   dynamic vWeb = '';
   String message = '';
   String updateUri = '';
-  String usertype = 'agent';
+  int? logstat;
+  String? username;
 
   Future<void> getAppVersion() async {
     String vLocal = await PackageInfoApi.getAppVersion();
@@ -70,12 +72,16 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+
     getAppVersion();
     if (widget.page > 2) {
       selectedPage = widget.page;
     } else {
-      selectedPage = UserSimplePreferences.getLogin() ?? 0;
+      selectedPage = 1;
     }
+
+    logstat = UserSimplePreferences.getLogin() ?? 0;
+    username = UserSimplePreferences.getUsername() ?? 'No Name';
 
     LocalNotificationService.initialize(context);
     FirebaseMessaging.instance.getInitialMessage().then(
@@ -118,14 +124,24 @@ class _HomeState extends State<Home> {
     );
   }
 
-  final _pageOptions = const [
-    AllCustomers(),
-    AgentScreen(),
-    // Dashboard(),
-    Reports(),
-    AddNew(),
-    AddLoan(),
-    DocVrf(ccode: null)
+  final _pageOptions = [
+    const AllCustomers(),
+    const AgentScreen(),
+    const Reports(),
+    const AddNew(),
+    const AddLoan(),
+    const Reports(),
+    const DocVrf(ccode: null)
+  ];
+
+  final _pageOptionsAdm = [
+    const AllCustomers(),
+    const Dashboard(),
+    const Reports(),
+    const AddNew(),
+    const AddLoan(),
+    const Reports(),
+    const DocVrf(ccode: null)
   ];
 
   @override
@@ -137,8 +153,8 @@ class _HomeState extends State<Home> {
           child: TopAppBar(title: widget.title),
         ),
         body: pageMaker(),
-        drawer: const Drawer(
-          child: NavDrawer(),
+        drawer: Drawer(
+          child: NavDrawer(uname: username),
         ),
         bottomNavigationBar: ConvexAppBar.badge(
           const {2: '990+'},
@@ -193,9 +209,13 @@ class _HomeState extends State<Home> {
 
   pageMaker() {
     return Container(
-      child: selectedPage <= 2
-          ? _pageOptions[selectedPage]
-          : _pageOptions[widget.page],
+      child: logstat == 7
+          ? selectedPage <= 2
+              ? _pageOptionsAdm[selectedPage]
+              : _pageOptionsAdm[widget.page]
+          : selectedPage <= 2
+              ? _pageOptions[selectedPage]
+              : _pageOptions[widget.page],
     );
   }
 
